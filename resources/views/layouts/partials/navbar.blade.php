@@ -1,15 +1,19 @@
 <style>
-    form {
-        padding-top: 20px;
-        text-align: center;
+    .navbar-fixed-height {
+        height: 70px;
+        /* Set your desired height */
     }
 
+    /* form {
+        padding-top: 20px;
+        text-align: center;
+    } */
     .btn {
         margin-right: 20px;
     }
 
     #search {
-        padding-bottom: 20px
+        padding-top: 10px
     }
 </style>
 <nav class="navbar bg-dark">

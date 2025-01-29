@@ -17,7 +17,7 @@
 
         @include("layouts.partials.navbar")
 
-        <div class="container">
+        <div class="container mt-5 pt-5">
             @yield("content")
         </div>
 

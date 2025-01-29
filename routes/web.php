@@ -40,3 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
     Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
+
+// Post detail route
+Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detail');

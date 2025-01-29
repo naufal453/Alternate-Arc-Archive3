@@ -1,5 +1,46 @@
 @extends("layouts.app-master")
+<style>
+    #search {
+        padding-top: 10px
+    }
 
+    .text-truncate-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: relative;
+    }
+
+    .text-truncate-2 .read-more {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: white;
+        padding-left: 5px;
+    }
+
+    .card.mb-3 {
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .card.mb-3:hover {
+        background-color: lightgray;
+    }
+
+    .card.mb-3 .card-body {
+        position: relative;
+        z-index: 2;
+    }
+
+    .card.mb-3 .user-link {
+        position: relative;
+        z-index: 3;
+    }
+</style>
 @section("content")
     <div class="p-5 rounded">
         @auth
@@ -14,18 +55,33 @@
             </form>
             <br>
             @foreach ($posts as $item)
-                <div class="card mb-3">
+                <div class="card mb-3" onclick="location.href='{{ route("home.post.detail", ["id" => $item->id]) }}'"
+                    style="cursor: pointer;">
                     <div class="card-body">
                         @if ($item->user)
-                            <a href="{{ route("user.show", ["id" => $item->user->id]) }}">{{ $item->user->username }}</a>
+                            <a href="{{ route("user.show", ["id" => $item->user->id]) }}"
+                                class="user-link">{{ $item->user->username }}</a>
                         @else
                             <span>Unknown User</span>
                         @endif
-                        <h5 class="card-title">{{ $item->title }}</h5>
-                        <p class="card-text">{{ $item->description }}</p>
-                        <small class="text-body-secondary">
-                            Posted {{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}
-                        </small>
+
+                        @if ($item->title)
+                            <h5 class="card-title">{{ $item->title }}</h5>
+                        @else
+                            <span>Unknown Title</span>
+                        @endif
+
+                        @if ($item->description)
+                            <p class="card-text text-truncate-2">
+                                {{ $item->description }}
+                            </p>
+                            <br>
+                            <small class="text-body-secondary">
+                                Posted {{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}
+                            </small>
+                        @else
+                            <span>Unknown Title</span>
+                        @endif
                     </div>
                 </div>
             @endforeach

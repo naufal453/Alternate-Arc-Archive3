@@ -1,5 +1,9 @@
 @extends("layouts.app-master")
-
+<style>
+    #search {
+        padding-top: 10px
+    }
+</style>
 @section("content")
     <div class="p-5 rounded">
         <h1>{{ $user->username }}</h1>
