@@ -16,7 +16,7 @@
         padding-top: 10px
     }
 </style>
-<nav class="navbar bg-dark">
+<nav class="navbar fixed-top bg-dark">
     <div class="container-fluid">
         <a href="/" class="navbar-brand text-white">Tech Forum</a>
         <!-- Profile Button at the Far-Right Corner -->
@@ -36,46 +36,7 @@
                     </svg>
                     Add Post
                 </button>
-                <!-- Add Post Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Post</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ url("posts") }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <!-- Title input -->
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="title" name="title"
-                                            placeholder="Title" required />
-                                    </div>
 
-                                    <!-- Content textarea -->
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Write your content here"
-                                            required></textarea>
-                                    </div>
-
-                                    <!-- Image upload -->
-                                    <div class="mb-3">
-                                        <input class="form-control" type="file" id="formFileMultiple" name="images[]"
-                                            multiple />
-                                    </div>
-
-                                    <!-- Submit button -->
-                                    <div class="text-end">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="btn-group" role="group">
                     <button class="btn btn-outline-light btn-sm dropdown-toggle d-flex align-items-center" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,3 +72,41 @@
         @endguest
 
 </nav>
+<!-- Add Post Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Post</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url("posts") }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <!-- Title input -->
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title"
+                            required />
+                    </div>
+
+                    <!-- Content textarea -->
+                    <div class="mb-3">
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Write your content here"
+                            required></textarea>
+                    </div>
+
+                    <!-- Image upload -->
+                    <div class="mb-3">
+                        <input class="form-control" type="file" id="formFileMultiple" name="images[]" multiple />
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

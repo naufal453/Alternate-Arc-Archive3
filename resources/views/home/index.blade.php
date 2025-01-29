@@ -57,7 +57,25 @@
             @foreach ($posts as $item)
                 <div class="card mb-3" onclick="location.href='{{ route("home.post.detail", ["id" => $item->id]) }}'"
                     style="cursor: pointer;">
-                    <div class="card-body">
+                    <div class="card-body position-relative">
+                        <div class="position-absolute top-0 end-0" style="margin-top:5px;margin-left:60px;">
+                            <div class="dropdown">
+                                <div class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                    onclick="event.stopPropagation();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-three-dots" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                    </svg>
+                                </div>
+                                <ul class="dropdown-menu" onclick="event.stopPropagation();">
+                                    <li><button class="dropdown-item" type="button"
+                                            onclick="location.href='{{ route("home.post.detail", ["id" => $item->id]) }}'">Detail</button>
+                                    </li>
+                                    <li><button class="dropdown-item" type="button">Report</button></li>
+                                </ul>
+                            </div>
+                        </div>
                         @if ($item->user)
                             <a href="{{ route("user.show", ["id" => $item->user->id]) }}"
                                 class="user-link">{{ $item->user->username }}</a>
