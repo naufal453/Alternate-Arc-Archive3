@@ -13,6 +13,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text">{{ $post->description }}</p>
+                    @if ($post->image_path)
+                        <img src="{{ asset("storage/" . $post->image_path) }}" alt="Post Image" class="img-fluid">
+                    @endif
                     <small class="text-body-secondary">
                         Posted {{ \Carbon\Carbon::parse($post->updated_at)->diffForHumans() }}
                     </small>
@@ -64,5 +67,13 @@
                 </div>
             </div>
         @endforeach
+    </div>
+    <div class="container">
+        <h1>{{ $post->title }}</h1>
+        <p>{{ $post->description }}</p>
+        @if ($post->image_path)
+            <img src="{{ asset("assets/storage/" . $post->image_path) }}" alt="Post Image" class="img-fluid">
+        @endif
+        <small>Posted by {{ $post->user->username }} on {{ $post->created_at->format("M d, Y") }}</small>
     </div>
 @endsection

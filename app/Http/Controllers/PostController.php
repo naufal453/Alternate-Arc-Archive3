@@ -41,23 +41,22 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'images.*' => 'nullable|image|max:2048', // Optional: Validate multiple images
+            'image' => 'nullable|image|max:2048', // Validate the image
         ]);
+
+        // Handle image upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('assets/storage', 'public');
+        }
 
         // Create a new post
         $post = Post::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'user_id' => \Illuminate\Support\Facades\Auth::id(), // Set the user_id to the currently authenticated user
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'image_path' => $imagePath, // Save the image path
         ]);
-
-        // Handle image uploads
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
-                // Save the image path to the database if needed
-            }
-        }
 
         return redirect()->route('home.index')->with('flash_message', 'Post Added!');
     }

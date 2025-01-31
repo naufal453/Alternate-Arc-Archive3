@@ -4,10 +4,18 @@
         /* Set your desired height */
     }
 
-    /* form {
-        padding-top: 20px;
-        text-align: center;
-    } */
+    .navbar-brand {
+        margin-right: 20px;
+    }
+
+    #search {
+        flex-grow: 1;
+    }
+
+    .btn-toolbar {
+        margin-left: 20px;
+    }
+
     .btn {
         margin-right: 20px;
     }
@@ -16,10 +24,9 @@
         padding-top: 10px
     }
 </style>
-<nav class="navbar fixed-top bg-dark">
-    <div class="container-fluid">
+<nav class="navbar fixed-top bg-dark navbar-fixed-height">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
         <a href="/" class="navbar-brand text-white">Tech Forum</a>
-        <!-- Profile Button at the Far-Right Corner -->
         <form id="search" class="d-flex align-items-center" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         </form>
@@ -70,7 +77,7 @@
                 <a href="{{ route("register.perform") }}" class="btn btn-warning">Sign-up</a>
             </div>
         @endguest
-
+    </div>
 </nav>
 <!-- Add Post Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -98,7 +105,7 @@
 
                     <!-- Image upload -->
                     <div class="mb-3">
-                        <input class="form-control" type="file" id="formFileMultiple" name="images[]" multiple />
+                        <input class="form-control" type="file" id="image" name="image" />
                     </div>
 
                     <!-- Submit button -->
