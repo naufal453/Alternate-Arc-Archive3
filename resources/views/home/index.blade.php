@@ -55,8 +55,8 @@
             </form>
             <br>
             @foreach ($posts as $item)
-                <div class="card mb-3" onclick="location.href='{{ route("home.post.detail", ["id" => $item->id]) }}'"
-                    style="cursor: pointer;">
+                <div class="card mb-3" style="border-radius: 0px;border:0px 0px 1px 0px solid #050505;"
+                    onclick="location.href='{{ route("home.post.detail", ["id" => $item->id]) }}'" style="cursor: pointer;">
                     <div class="card-body">
                         @if ($item->user)
                             <a href="{{ route("user.show", ["id" => $item->user->id]) }}"
