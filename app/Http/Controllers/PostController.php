@@ -54,7 +54,7 @@ class PostController extends Controller
         $post = Post::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'id' => \Illuminate\Support\Facades\Auth::id(),
             'image_path' => $imagePath, // Save the image path
         ]);
 

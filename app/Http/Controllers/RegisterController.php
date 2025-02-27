@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -25,23 +26,22 @@ class RegisterController extends Controller
      * 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function register(RegisterRequest $request)
-    {
-        // Wrap user creation in a try-catch block for error handling
-        try {
-            // Create the user using the validated request data
-            $user = User::create($request->validated());
+   
+public function register(RegisterRequest $request)
+{
+    try {
+        // Hash the password before creating the user
+        $userData = $request->validated();
+        $userData['password'] = Hash::make($userData['password']);
 
-            // Log the user in
-            Auth::login($user);
+        $user = User::create($userData);
 
-            // Redirect to the home page with a success message
-            return redirect('/')->with('success', "Account successfully registered.");
-        } catch (\Exception $e) {
-            // Log the exception and return an error message
-            \Log::error('Registration Error: ' . $e->getMessage());
+        Auth::login($user);
 
-            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
-        }
+        return redirect('/')->with('success', "Account successfully registered.");
+    } catch (\Exception $e) {
+        \Log::error('Registration Error: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong. Please try again.');
     }
+}
 }
