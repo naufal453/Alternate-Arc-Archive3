@@ -43,3 +43,5 @@ Route::group(['middleware' => ['auth']], function () {
 
 // Post detail route
 Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detail');
+
+Route::resource('posts', PostController::class);

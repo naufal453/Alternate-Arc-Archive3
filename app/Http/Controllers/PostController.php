@@ -37,28 +37,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data
-        $validated = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|max:2048', // Validate the image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Handle image upload
-        $imagePath = null;
+        $post = new Post();
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->user_id = auth()->id(); // Set the user_id
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('assets/storage', 'public');
+            $imagePath = $request->file('image')->store('images', 'public');
+            $post->image_path = $imagePath;
         }
 
-        // Create a new post
-        $post = Post::create([
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'id' => \Illuminate\Support\Facades\Auth::id(),
-            'image_path' => $imagePath, // Save the image path
-        ]);
+        $post->save();
 
-        return redirect()->route('home.index')->with('flash_message', 'Post Added!');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     /**
