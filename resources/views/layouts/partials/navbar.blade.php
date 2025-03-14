@@ -26,7 +26,7 @@
 </style>
 <nav class="navbar fixed-top bg-dark navbar-fixed-height">
     <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a href="/" class="navbar-brand text-white">Tech Forum</a>
+        <a href="/" class="navbar-brand text-white">Alternate Arc Archive</a>
         <form id="search" class="d-flex align-items-center" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         </form>

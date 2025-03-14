@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Web Forum</title>
+        <title>Alternate Arc Archive</title>
 
         <!-- Bootstrap core CSS -->
         <link href="{{ asset("assets/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet">
