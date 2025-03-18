@@ -1,7 +1,8 @@
 @extends("layouts.app-master")
 <style>
-    #search {
-        padding-top: 10px
+    /* Specific background color for the content area */
+    body {
+        background-color:#FFF5E4 !important; /* Use a specific class to avoid affecting the navbar */
     }
 
     .text-truncate-2 {
@@ -11,6 +12,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
         position: relative;
+    }
+
+    #search {
+        margin-top: 16px;
     }
 
     .text-truncate-2 .read-more {
@@ -40,9 +45,14 @@
         position: relative;
         z-index: 3;
     }
+
+    .card-img-top {
+        height: 300px;
+        object-fit: cover;
+    }
 </style>
 @section("content")
-    <div class="p-5 rounded">
+    <div class="content-area p-5 rounded">
         @auth
             <!-- Sorting Form -->
             <form method="GET" action="{{ route("home.index") }}">
@@ -54,41 +64,33 @@
                 </select>
             </form>
             <br>
-            @foreach ($posts as $item)
-                <div class="card mb-3" style="border-radius: 0px;border:0px 0px 1px 0px solid #050505;"
-                    onclick="location.href='{{ route("home.post.detail", ["id" => $item->id]) }}'" style="cursor: pointer;">
-                    <div class="card-body">
-                        @if ($item->user)
-                            <a href="{{ route("user.show", ["id" => $item->user->id]) }}"
-                                class="user-link">{{ $item->user->username }}</a>
-                        @else
-                            <span>Unknown User</span>
-                        @endif
+            <div class="row">
+                @foreach ($posts as $item)
+                    <div class="col-md-4 mb-3">
+                        <div class="card" style="width: 18rem;">
+                            @if ($item->image_path)
+                                <img src="{{ asset('storage/' . $item->image_path) }}" class="card-img-top" alt="Post Image">
+                            @else
+                                <img src="..." class="card-img-top" alt="Default Image">
+                            @endif
+                            <div class="card-body">
 
-                        @if ($item->title)
-                            <h5 class="card-title">{{ $item->title }}</h5>
-                        @else
-                            <span>Unknown Title</span>
-                        @endif
-
-                        @if ($item->description)
-                            <p class="card-text text-truncate-2">
-                                {{ $item->description }}
-                            </p>
-                        @else
-                            <span>Unknown Title</span>
-                        @endif
-
-                        @if ($item->image_path)
-                            <img src="{{ asset("assets/storage/" . $item->image_path) }}" alt="Post Image" class="img-fluid">
-                        @endif
-                        <br>
-                        <small class="text-body-secondary">
-                            Posted {{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans() }}
-                        </small>
+                                <h5 class="card-title">{{ $item->title ?? 'Unknown Title' }}</h5>
+                                <p class="card-text text-truncate-2">{{ $item->description ?? 'No description available' }}</p>
+                                <a href="{{ route("home.post.detail", ["id" => $item->id]) }}" class="btn btn-primary">Read More</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Created by                                 @if ($item->user)
+                                    <a href="{{ route("user.show", ["id" => $item->user->id]) }}"
+                                        class="user-link">{{ $item->user->username }}</a>
+                                @else
+                                    <span>Unknown User</span>
+                                @endif on {{ $item->created_at->format("M d, Y") }}</small>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         @endauth
         @guest
             <h1>Homepage</h1>

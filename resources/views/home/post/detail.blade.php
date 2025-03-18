@@ -6,8 +6,9 @@
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->description }}</p>
     @if ($post->image_path)
-        <img src="{{ asset("storage/" . $post->image_path) }}" alt="Post Image" class="img-fluid">
+        <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post Image" class="img-fluid" style="max-height: 700px;">
     @endif
+    <br>
     <small>Posted by {{ $post->user->username }} on {{ $post->created_at->format("M d, Y") }}</small>
 
     <hr>
@@ -23,13 +24,35 @@
                     <h5>{{ $comment->user->username }}</h5>
                     <p>{{ $comment->content }}</p>
                     <small>{{ $comment->created_at->format('d M Y, H:i') }}</small>
+                    <br>
+                    {{-- Delete Button --}}
                     @if(Auth::id() === $comment->user_id)
-                        <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="mt-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
+                        <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->id }}">
+                            Delete
+                        </button>
                     @endif
+
+                    {{-- Delete Confirmation Modal --}}
+                    <div class="modal fade" id="deleteModal{{ $comment->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $comment->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{ $comment->id }}">Confirm Delete</h5>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this comment?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         @empty
@@ -38,7 +61,7 @@
     </div>
 
     {{-- Add Comment Form --}}
-    <form action="{{ route('comments.store') }}" method="POST" class="mt-4">
+    <form action="{{ route('comments.store') }}" method="POST" class="mt-4" style="margin-bottom: 100px;">
         @csrf
         <div class="mb-3">
             <label for="content" class="form-label">Add a Comment</label>

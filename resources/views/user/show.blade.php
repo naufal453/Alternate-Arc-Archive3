@@ -1,13 +1,13 @@
 @extends("layouts.app-master")
 <style>
     #search {
-        padding-top: 10px
+        padding-top: 16px
     }
 </style>
 @section("content")
     <div class="p-5 rounded">
         <h1>{{ $user->username }}</h1>
-        <h2>Posts</h2>
+        <h2>Timeline</h2>
         @foreach ($user->posts as $post)
             <div class="card mb-3">
                 <div class="card-body">
@@ -16,6 +16,7 @@
                     @if ($post->image_path)
                         <img src="{{ asset("storage/" . $post->image_path) }}" alt="Post Image" class="img-fluid">
                     @endif
+                    <br>
                     <small class="text-body-secondary">
                         Posted {{ \Carbon\Carbon::parse($post->updated_at)->diffForHumans() }}
                     </small>
