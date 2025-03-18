@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detail');
 
 Route::resource('posts', PostController::class);
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::get('/posts/{id}/comments', [CommentController::class, 'show'])->name('posts.comments');
+
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');

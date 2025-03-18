@@ -63,6 +63,7 @@
                                             class="text-danger text-left">{{ $errors->first("password_confirmation") }}</span>
                                     @endif
                                 </div>
+                                <br>
                                 <div class="form-group">
                                     <button type="submit"
                                         class="form-control btn btn-primary rounded submit px-3">Register</button>

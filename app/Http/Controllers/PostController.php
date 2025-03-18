@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePostRequest;
+use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -35,36 +38,36 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+    protected $imageUploadService;
 
-        $post = new Post();
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->user_id = auth()->id(); // Set the user_id
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $post->image_path = $imagePath;
+        public function __construct(ImageUploadService $imageUploadService)
+        {
+            $this->imageUploadService = $imageUploadService;
         }
 
-        $post->save();
+        public function store(StorePostRequest $request)
+        {
+            $post = new Post();
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->user_id = Auth::id();
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
-    }
+            if ($request->hasFile('image')) {
+                $post->image_path = $this->imageUploadService->upload($request->file('image'));
+            }
+
+            $post->save();
+
+            return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+        }
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return view('post.detail', compact('post'));
+        $post = Post::with('comments.user')->findOrFail($id); // Eager load comments and their users
+        return view('home.post.detail', compact('post')); // Correct view path
     }
 
     /**
