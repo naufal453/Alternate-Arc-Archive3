@@ -45,7 +45,7 @@ class PostController extends Controller
             $this->imageUploadService = $imageUploadService;
         }
 
-        public function store(StorePostRequest $request)
+        public function store(Request $request)
         {
             $post = new Post();
             $post->title = $request->title;

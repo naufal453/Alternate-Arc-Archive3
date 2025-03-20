@@ -1,4 +1,4 @@
-<body style="margin-top:100px;margin-left:100px;">
+<body>
     @auth
         <!-- Sorting Form -->
         <form method="GET" action="{{ route('home.index') }}">
@@ -9,17 +9,17 @@
             </select>
         </form>
         <br>
-        <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-right:50px;">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
             @foreach ($posts as $item)
                 <div class="col">
                     <!-- Card for larger devices -->
-                    <div class="card d-none d-md-flex mb-3" style="max-width: 540px;"
+                    <div class="card d-none d-md-flex mb-3" style="width: 540px;"
                         onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 @if ($item->image_path)
                                     <img src="{{ asset('storage/' . $item->image_path) }}" class="img-fluid rounded-start"
-                                        alt="Post Image" style="height: 100%; object-fit: cover;">
+                                        alt="Post Image" style="height: 250px; object-fit: cover;">
                                 @else
                                     <img src="..." class="img-fluid rounded-start" alt="Default Image"
                                         style="height: 100%; object-fit: cover;">
@@ -50,8 +50,7 @@
 
                     <!-- Card for smaller devices -->
                     <div class="card d-md-none mb-3"
-                        onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'"
-                        style="margin-right:25px;">
+                        onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         @if ($item->image_path)
                             <img src="{{ asset('storage/' . $item->image_path) }}" class="card-img-top" alt="Post Image">
                         @else

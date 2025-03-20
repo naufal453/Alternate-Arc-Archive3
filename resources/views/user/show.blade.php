@@ -24,7 +24,8 @@
                             </small>
                         </div>
                         @if (auth()->id() == $post->user_id)
-                            <div class="card-footer">
+                            <div class="card-footer d-flex justify-content-between">
+                                <button type="button" class="btn btn-success btn-sm">Add Chapter</button>
                                 <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#editPostModal{{ $post->id }}">Edit</button>
                                 <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
@@ -32,6 +33,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
+
                             </div>
                         @endif
                     </div>
