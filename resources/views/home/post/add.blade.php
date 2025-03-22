@@ -22,10 +22,15 @@
                             required></textarea>
                     </div>
 
-                    <!-- Image upload -->
+                    <!-- Image upload with preview -->
                     <div class="input-group mb-3">
-                        <input class="form-control" type="file" id="image" name="image" required />
-                        <label class="input-group-text" for="inputGroupFile02">Add Cover</label>
+                        <input class="form-control" type="file" id="image" name="image" accept="image/*"
+                            required onchange="previewImage(event)" />
+                        <label class="input-group-text" for="image">Add Cover</label>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <img id="imagePreview" src="#" alt="Image Preview"
+                            style="display: none; max-width: 100%; height: auto; border-radius: 10px;" />
                     </div>
 
                     <!-- Submit button -->
@@ -37,3 +42,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('imagePreview');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+</script>

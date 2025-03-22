@@ -16,13 +16,7 @@ class CommentController extends Controller{
         $comment->save();
         return redirect()->back();
     }
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-        $comments = Comment::where('post_id', $id)->latest()->get();
 
-        return view('comments.index', compact('post', 'comments'));
-    }
     public function destroy(Request $request){
         $comment = Comment::find($request->id);
         if($comment->user_id == Auth::id()){

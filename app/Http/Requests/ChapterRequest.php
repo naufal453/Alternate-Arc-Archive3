@@ -8,12 +8,13 @@ class ChapterRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        return true; // Allow all users to make this request. Add custom logic if needed.
     }
 
     public function rules()
     {
         return [
+            'title' => 'required|string|max:255',
             'content' => 'required|string|max:5000',
             'post_id' => 'required|exists:posts,id',
         ];

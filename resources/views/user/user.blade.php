@@ -13,7 +13,7 @@
             @foreach ($posts as $item)
                 <div class="col">
                     <!-- Card for larger devices -->
-                    <div class="card d-none d-md-flex mb-3" style="width: 540px;"
+                    <div class="card d-none d-md-flex mb-3" style="width: 540px;margin-left:20px;"
                         onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         <div class="row g-0">
                             <div class="col-md-4">
