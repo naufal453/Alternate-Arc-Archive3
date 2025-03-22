@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ChapterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,9 @@ Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('co
 Route::get('/posts/{id}/comments', [CommentController::class, 'show'])->name('posts.comments');
 
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+
+Route::resource('chapters', ChapterController::class);
+Route::post('/chapters', [ChapterController::class, 'store'])->name('chapters.store');
+Route::get('/chapters/{id}', [ChapterController::class, 'show'])->name('chapters.show');
+Route::put('/chapters/{id}', [ChapterController::class, 'update'])->name('chapters.update');
+Route::delete('/chapters/{id}', [ChapterController::class, 'destroy'])->name('chapters.destroy');

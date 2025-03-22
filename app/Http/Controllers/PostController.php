@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Chapter;
 
 class PostController extends Controller
 {
@@ -66,8 +67,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::with('comments.user')->findOrFail($id); // Eager load comments and their users
-        return view('home.post.detail', compact('post')); // Correct view path
+        $post = Post::with('user')->findOrFail($id);
+        $chapters = Chapter::where('post_id', $id)->get(); // Ambil chapter terkait post
+
+        return view('home.post.detail', compact('post', 'chapters'));
     }
 
     /**

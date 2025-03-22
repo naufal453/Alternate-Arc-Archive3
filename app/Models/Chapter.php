@@ -1,19 +1,18 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Chapter extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'user_id',
-        'image_path',
+        'title', // Add this if the title field exists
+        'content',
+        'post_id', // Include post_id here
+        'user_id', // Include user_id if applicable
     ];
 
     public function user()
@@ -21,13 +20,8 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function post()
     {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function chapters()
-    {
-        return $this->hasMany(Chapter::class);
+        return $this->belongsTo(Post::class);
     }
 }
