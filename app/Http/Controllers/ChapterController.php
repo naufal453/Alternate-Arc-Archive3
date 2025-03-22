@@ -66,12 +66,18 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $chapter = Chapter::findOrFail($id);
+
+        // Authorization check
+        if ($chapter->user_id !== Auth::user()->id) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 
-        $chapter = Chapter::findOrFail($id);
         $chapter->update($validated);
 
         return redirect()->back()->with('success', 'Chapter updated successfully.');
@@ -83,6 +89,12 @@ class ChapterController extends Controller
     public function destroy($id)
     {
         $chapter = Chapter::findOrFail($id);
+
+        // Authorization check
+        if ($chapter->user_id !== Auth::user()->id) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
         $chapter->delete();
 
         return redirect()->back()->with('success', 'Chapter deleted successfully.');

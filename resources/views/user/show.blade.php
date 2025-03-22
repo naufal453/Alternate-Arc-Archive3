@@ -35,11 +35,9 @@
                                 </button>
                                 <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#editPostModal{{ $post->id }}">Edit</button>
-                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
+                                <!-- Delete Story Button -->
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteStoryModal{{ $post->id }}">Delete</button>
                             </div>
                         @endif
                     </div>
@@ -62,11 +60,12 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Chapter Title</label>
-                                        <input type="text" class="form-control" id="title" name="title" required>
+                                        <input type="text" class="form-control" id="title" name="title"
+                                            minlength="9" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Chapter Content</label>
-                                        <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                                        <textarea class="form-control" id="content" name="content" rows="5" minlength="100" required></textarea>
                                     </div>
                                     <!-- Hidden input to pass the post ID -->
                                     <input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -74,6 +73,31 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save Chapter</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete Story Confirmation Modal -->
+                <div class="modal fade" id="deleteStoryModal{{ $post->id }}" tabindex="-1"
+                    aria-labelledby="deleteStoryModalLabel{{ $post->id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteStoryModalLabel{{ $post->id }}">Delete Story</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete the story "{{ $post->title }}"? This action cannot be
+                                    undone.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </div>
                             </form>
                         </div>
