@@ -36,8 +36,8 @@
                         {{-- Check if the authenticated user is the owner of the chapter --}}
                         @if (auth()->id() === $chapter->user_id)
                             {{-- Edit Chapter Button --}}
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#editChapterModal{{ $chapter->id }}">Edit</button>
+                            <!-- <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#editChapterModal{{ $chapter->id }}">Edit</button> -->
 
                             {{-- Delete Chapter Button --}}
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -46,7 +46,7 @@
                     </li>
 
                     {{-- Edit Chapter Modal --}}
-                    @if (auth()->id() === $chapter->user_id)
+                    <!-- @if (auth()->id() === $chapter->user_id)
                         <div class="modal fade" id="editChapterModal{{ $chapter->id }}" tabindex="-1"
                             aria-labelledby="editChapterModalLabel{{ $chapter->id }}" aria-hidden="true">
                             <div class="modal-dialog">
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif -->
 
                     {{-- Delete Chapter Modal --}}
                     @if (auth()->id() === $chapter->user_id)

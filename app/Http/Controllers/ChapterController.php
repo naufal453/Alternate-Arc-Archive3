@@ -42,7 +42,7 @@ class ChapterController extends Controller
     public function update(ChapterRequest $request, $id)
     {
         $chapter = Chapter::findOrFail($id);
-
+        dd($request->all());
         // Authorization check
         if ($chapter->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Unauthorized action.');

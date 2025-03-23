@@ -13,49 +13,37 @@ use App\Http\Controllers\ChapterController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
-// Define the home route
+// Home route
 Route::get('/', [PostController::class, 'index'])->name('home.index');
 
 // Guest middleware routes
-Route::group(['middleware' => ['guest']], function () {
-    // Register Routes
+Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
     Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
 
-    // Login Routes
     Route::get('/login', [LoginController::class, 'show'])->name('login.show');
     Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 });
 
 // Auth middleware routes
-Route::group(['middleware' => ['auth']], function () {
-    // Logout Route
+Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
+    // Posts (excluding index & show since they are defined separately)
     Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
 
-// Post detail route
+// Post detail routes
 Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detail');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-Route::resource('posts', PostController::class);
-
+// Comments
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::get('/posts/{id}/comments', [CommentController::class, 'show'])->name('posts.comments');
 
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-
-Route::resource('chapters', ChapterController::class);
-Route::post('/chapters', [ChapterController::class, 'store'])->name('chapters.store');
-Route::get('/chapters/{id}', [ChapterController::class, 'show'])->name('chapters.show');
-Route::put('/chapters/{id}', [ChapterController::class, 'update'])->name('chapters.update');
-Route::delete('/chapters/{id}', [ChapterController::class, 'destroy'])->name('chapters.destroy');
+// Chapters (using resource routes properly)
+Route::resource('chapters', ChapterController::class)->except(['create', 'edit']);

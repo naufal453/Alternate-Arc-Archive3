@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('chapters', function (Blueprint $table) {
-            $table->string('title')->after('id'); // Add the title column
+            if (!Schema::hasColumn('chapters', 'title')) {
+                $table->string('title')->after('id');
+            }
         });
     }
 
@@ -22,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('chapters', function (Blueprint $table) {
-            $table->dropColumn('title'); // Remove the title column if rolled back
+            if (Schema::hasColumn('chapters', 'title')) {
+                $table->dropColumn('title');
+            }
         });
     }
 };
