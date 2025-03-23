@@ -36,9 +36,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
 
+
+
 // Post detail routes
 Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detail');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 // Comments
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
