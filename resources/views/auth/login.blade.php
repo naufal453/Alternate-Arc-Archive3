@@ -1,6 +1,6 @@
-@extends("layouts.auth-master")
+@extends('layouts.auth-master')
 
-@section("content")
+@section('content')
     <style>
         input {
             margin-top: 10px;
@@ -17,7 +17,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="wrap">
-                        <div class="img" style="background-image: url('{{ asset("images/bg-1.jpg") }}');"></div>
+                        <div class="img" style="background-image: url('{{ asset('images/bg-1.jpg') }}');"></div>
                         <div class="login-wrap p-4 p-md-5">
                             <div class="d-flex">
                                 <div class="w-100">
@@ -31,24 +31,24 @@
                                     </p>
                                 </div>
                             </div>
-                            <form method="post" action="{{ route("login.perform") }}" class="signin-form">
+                            <form method="post" action="{{ route('login.perform') }}" class="signin-form">
                                 @csrf
                                 <div class="form-group mt-3">
-                                    <input type="text" class="form-control" name="username" value="{{ old("username") }}"
+                                    <input type="text" class="form-control" name="username" value="{{ old('username') }}"
                                         placeholder="Username" required="required" autofocus>
 
-                                    @if ($errors->has("username"))
-                                        <span class="text-danger text-left">{{ $errors->first("username") }}</span>
+                                    @if ($errors->has('username'))
+                                        <span class="text-danger text-left">{{ $errors->first('username') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <input id="password-field" type="password" class="form-control" name="password"
-                                        value="{{ old("password") }}" placeholder="Password" required="required">
+                                        value="{{ old('password') }}" placeholder="Password" required="required">
 
                                     <span toggle="#password-field"
                                         class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                                    @if ($errors->has("password"))
-                                        <span class="text-danger text-left">{{ $errors->first("password") }}</span>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger text-left">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <p class="text-center">Not a member? <a href="{{ route("register.perform") }}">Sign Up</a></p>
+                            <p class="text-center">Not a member? <a href="{{ route('register.perform') }}">Sign Up</a></p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
     </section>
 @endsection
 
-@section("scripts")
+@section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
