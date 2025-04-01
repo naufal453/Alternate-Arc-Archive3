@@ -13,7 +13,7 @@
                     <!-- Title input -->
                     <div class="mb-3">
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title"
-                            required />
+                            maxlength="100" required />
                     </div>
 
                     <!-- Content textarea -->

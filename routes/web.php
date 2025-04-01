@@ -8,6 +8,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +31,13 @@ Route::middleware(['guest'])->group(function () {
 // Auth middleware routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{username}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{username}/edit', [UserController::class, 'edit'])->name('user.usersettings');
+    Route::patch('/user/{username}/update', [UserController::class, 'update'])->name('users.update');
 
     // Posts (excluding index & show since they are defined separately)
     Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
-
-
 
 // Post detail routes
 Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detail');
@@ -48,6 +49,10 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::get('/posts/{id}/comments', [CommentController::class, 'show'])->name('posts.comments');
+
+// Likes
+Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
+Route::delete('/likes', [LikeController::class, 'destroy'])->name('likes.destroy');
 
 // Chapters (using resource routes properly)
 Route::resource('chapters', ChapterController::class)->except(['create', 'edit']);

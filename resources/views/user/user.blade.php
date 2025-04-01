@@ -6,6 +6,7 @@
             <select name="sort" id="sort" onchange="this.form.submit()">
                 <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Latest</option>
                 <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest</option>
+
             </select>
         </form>
         <br>
@@ -35,7 +36,7 @@
                                         <small class="text-body-secondary">
                                             Created by
                                             @if ($item->user)
-                                                <a href="{{ route('user.show', ['id' => $item->user->id]) }}"
+                                                <a href="{{ route('user.show', ['username' => $item->user->username]) }}"
                                                     class="user-link">{{ $item->user->username }}</a>
                                             @else
                                                 <span>Unknown User</span>
@@ -65,7 +66,7 @@
                                 <small class="text-body-secondary">
                                     Created by
                                     @if ($item->user)
-                                        <a href="{{ route('user.show', ['id' => $item->user->id]) }}"
+                                        <a href="{{ route('user.show', ['username' => $item->user->username]) }}"
                                             class="user-link">{{ $item->user->username }}</a>
                                     @else
                                         <span>Unknown User</span>

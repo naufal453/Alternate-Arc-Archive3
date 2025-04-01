@@ -12,27 +12,31 @@
 
         <!-- Navbar content -->
         <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Search Form -->
-            <form id="search" class="d-flex me-auto mb-2 mb-lg-0" role="search">
-                <input class="form-control me-2" type="search"
-                    style="background-color:#FFF5E4 !important;color:#6A9C89 !important;" placeholder="Search"
-                    aria-label="Search">
-            </form>
+            <!-- Search Form (only on index.blade.php) -->
+            @if (Route::is('home.index'))
+                <form id="search" class="d-flex me-auto mb-2 mb-lg-0" role="search">
+                    <input class="form-control me-2" type="search"
+                        style="background-color:#FFF5E4 !important;color:#6A9C89 !important;" placeholder="Search"
+                        aria-label="Search">
+                </form>
+            @endif
 
             <!-- Authenticated User Section -->
             @auth
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center ms-auto"> <!-- Add ms-auto to align to the right -->
                     <!-- Add Post Button -->
-                    <button class="btn btn-outline-dark btn-sm me-2 d-flex align-items-center" type="button"
-                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                        </svg>
-                        Create Story
-                    </button>
+                    @if (Route::is('home.index') || Route::is('user.show'))
+                        <button class="btn btn-outline-dark btn-sm me-2 d-flex align-items-center" type="button"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                            Create Story
+                        </button>
+                    @endif
 
                     <!-- User Dropdown -->
                     <div class="btn-group" role="group">
@@ -47,9 +51,12 @@
                             <span>{{ auth()->user()->name }}</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('user.show', ['id' => auth()->user()->id]) }}">My
-                                    Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('user.show', ['username' => auth()->user()->username]) }}">My Profile</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('user.usersettings', ['username' => auth()->user()->username]) }}">Settings</a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -61,7 +68,7 @@
 
             <!-- Guest Section -->
             @guest
-                <div class="text-end">
+                <div class="text-end ms-auto"> <!-- Add ms-auto to align to the right -->
                     <a href="{{ route('login.perform') }}" class="btn btn-outline-dark me-2">Login</a>
                     <a href="{{ route('register.perform') }}" class="btn btn-primary">Sign-up</a>
                 </div>

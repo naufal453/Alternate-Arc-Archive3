@@ -7,6 +7,8 @@
             /* Use a specific class to avoid affecting the navbar */
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container">
         {{-- Post Details --}}
         <h1>{{ $post->title }}</h1>
@@ -20,6 +22,20 @@
         <p>{{ $post->description }}</p>
         <br>
         <small>Posted by {{ $post->user->username }} on {{ $post->created_at->format('M d, Y') }}</small>
+        <hr>
+        @if (auth()->check())
+            @php
+                $liked = $post->likes->contains('user_id', auth()->id());
+            @endphp
+
+            <button id="like-button" class="btn {{ $liked ? 'btn-danger' : 'btn-primary' }}"
+                data-liked="{{ $liked ? 'true' : 'false' }}" data-post-id="{{ $post->id }}">
+                <i class="bi {{ $liked ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up' }}"></i>
+                <span id="like-text">{{ $liked ? 'Unlike' : 'Like' }}</span>
+            </button>
+        @endif
+
+        <p id="like-count">{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</p>
 
         <hr>
 
@@ -35,53 +51,12 @@
 
                         {{-- Check if the authenticated user is the owner of the chapter --}}
                         @if (auth()->id() === $chapter->user_id)
-                            {{-- Edit Chapter Button --}}
-                            <!-- <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editChapterModal{{ $chapter->id }}">Edit</button> -->
-
                             {{-- Delete Chapter Button --}}
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#deleteChapterModal{{ $chapter->id }}">Delete</button>
                         @endif
                     </li>
 
-                    {{-- Edit Chapter Modal --}}
-                    <!-- @if (auth()->id() === $chapter->user_id)
-    <div class="modal fade" id="editChapterModal{{ $chapter->id }}" tabindex="-1"
-                                aria-labelledby="editChapterModalLabel{{ $chapter->id }}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form method="POST" action="{{ route('chapters.update', $chapter->id) }}">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editChapterModalLabel{{ $chapter->id }}">Edit
-                                                    Chapter
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="title" class="form-label">Chapter Title</label>
-                                                    <input type="text" class="form-control" id="title" name="title"
-                                                        value="{{ $chapter->title }}" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="content" class="form-label">Chapter Content</label>
-                                                    <textarea class="form-control" id="content" name="content" rows="5" required>{{ $chapter->content }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-    @endif -->
 
                     {{-- Delete Chapter Modal --}}
                     @if (auth()->id() === $chapter->user_id)
@@ -121,3 +96,45 @@
         @include('layouts.partials.comments')
     </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const likeButton = document.getElementById('like-button');
+        const likeCount = document.getElementById('like-count');
+        const likeText = document.getElementById('like-text');
+
+        if (likeButton) {
+            likeButton.addEventListener('click', function() {
+                const postId = likeButton.getAttribute('data-post-id');
+                const liked = likeButton.getAttribute('data-liked') === 'true';
+
+                fetch(liked ? '/likes' : '/likes', {
+                        method: liked ? 'DELETE' : 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content'),
+                        },
+                        body: JSON.stringify({
+                            post_id: postId
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update button state
+                            likeButton.setAttribute('data-liked', liked ? 'false' : 'true');
+                            likeButton.classList.toggle('btn-danger', !liked);
+                            likeButton.classList.toggle('btn-primary', liked);
+                            likeText.textContent = liked ? 'Like' : 'Unlike';
+
+                            // Update like count
+                            likeCount.textContent =
+                                `${data.likes_count} ${data.likes_count === 1 ? 'like' : 'likes'}`;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        }
+    });
+</script>

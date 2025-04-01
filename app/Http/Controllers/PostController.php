@@ -90,8 +90,9 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         // Authorization check
-        if ($post->user_id != \Illuminate\Support\Facades\Auth::user()->id) {
-            return redirect()->route('user.show', ['id' => \Illuminate\Support\Facades\Auth::user()->id])->with('error', 'Unauthorized action.');
+        if ($post->user_id != Auth::id()) {
+            return redirect()->route('user.show', ['username' => Auth::user()->username])
+                             ->with('error', 'Unauthorized action.');
         }
 
         // Validate the request data
@@ -102,7 +103,8 @@ class PostController extends Controller
 
         $post->update($validated);
 
-        return redirect()->route('user.show', ['id' => $post->user_id])->with('flash_message', 'Post Updated!');
+        return redirect()->route('user.show', ['username' => $post->user->username])
+                         ->with('flash_message', 'Post Updated!');
     }
 
     /**
@@ -113,12 +115,14 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         // Authorization check
-        if ($post->user_id != \Illuminate\Support\Facades\Auth::id()) {
-            return redirect()->route('user.show', ['id' => \Illuminate\Support\Facades\Auth::id()])->with('error', 'Unauthorized action.');
+        if ($post->user_id != Auth::id()) {
+            return redirect()->route('user.show', ['username' => Auth::user()->username])
+                             ->with('error', 'Unauthorized action.');
         }
 
         $post->delete();
 
-        return redirect()->route('user.show', ['id' => $post->user_id])->with('flash_message', 'Post Deleted!');
+        return redirect()->route('user.show', ['username' => $post->user->username])
+                         ->with('flash_message', 'Post Deleted!');
     }
 }
