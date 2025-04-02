@@ -54,7 +54,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.show', ['username' => $user->username])
+        return redirect()->route('user.usersettings', ['username' => $user->username])
                          ->with('success', 'Profile updated successfully.');
     }
 }

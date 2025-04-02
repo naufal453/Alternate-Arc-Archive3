@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/show.css') }}">
 {{-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> --}}
 
+
 <body>
 
 
@@ -21,6 +22,11 @@
                         @method('PATCH')
 
                         <div class="form-group">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <label for="username" class="control-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username"
                                 value="{{ auth()->user()->username }}" required>

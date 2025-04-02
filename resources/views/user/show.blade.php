@@ -2,13 +2,9 @@
 <link rel="stylesheet" href="{{ asset('css/show.css') }}">
 @section('content')
     <div class="p-5 rounded">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        <h1>{{ auth()->user()->username }}</h1>
-        <h2>Timeline</h2>
+
+
+        <h2>Dashboard</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($user->posts as $post)
                 <div class="col">

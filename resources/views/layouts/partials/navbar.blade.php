@@ -25,7 +25,7 @@
             @auth
                 <div class="d-flex align-items-center ms-auto"> <!-- Add ms-auto to align to the right -->
                     <!-- Add Post Button -->
-                    @if (Route::is('home.index') || Route::is('user.show'))
+                    @if (Route::is('user.show'))
                         <button class="btn btn-outline-dark btn-sm me-2 d-flex align-items-center" type="button"
                             data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -48,11 +48,11 @@
                                 <path
                                     d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
                             </svg>
-                            <span>{{ auth()->user()->name }}</span>
+                            <span>{{ auth()->user()->username }}</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item"
-                                    href="{{ route('user.show', ['username' => auth()->user()->username]) }}">My Profile</a>
+                                    href="{{ route('user.show', ['username' => auth()->user()->username]) }}"> Dashboard</a>
                             </li>
                             <li><a class="dropdown-item"
                                     href="{{ route('user.usersettings', ['username' => auth()->user()->username]) }}">Settings</a>
