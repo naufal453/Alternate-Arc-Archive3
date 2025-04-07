@@ -116,7 +116,7 @@
         @endif
         <br>
         <br>
-        <p class="post-description">{!! $post->description !!}</p>
+        <p class="post-description">{{strip_tags(html_entity_decode($post->description)) }}</p>
         <br>
 
         <hr>

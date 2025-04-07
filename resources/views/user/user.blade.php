@@ -31,8 +31,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h6 class="card-title">{{ $item->title ?? 'Unknown Title' }}</h6>
                                     <p class="card-text">
-                                        {!! Str::limit($item->description ?? 'No description available', 100) !!}
-
+                                        {{ Str::limit(strip_tags(html_entity_decode($item->description)), 100) }}
                                     </p>
                                     <p style="display: flex; align-items: center; gap: 10px;">
                                         <!-- Likes Count -->
@@ -84,7 +83,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->title ?? 'Unknown Title' }}</h5>
                             <p class="card-text">
-                                {{ Str::limit($item->description ?? 'No description available', 100) }}
+                                {{ Str::limit(strip_tags(html_entity_decode($item->description)), 100) }}
                             </p>
                             <p class="card-text">
                                 <small class="text-body-secondary">

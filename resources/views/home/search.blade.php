@@ -34,7 +34,7 @@
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $result->title ?? 'Unknown Title' }}</h5>
                                         <p class="card-text">
-                                            {{ Str::limit($result->description ?? 'No description available', 100) }}
+                                             {{ Str::limit(strip_tags(html_entity_decode($result->description)), 100) }}
                                         </p>
                                         <p class="card-text mt-auto">
                                             <small class="text-body-secondary">

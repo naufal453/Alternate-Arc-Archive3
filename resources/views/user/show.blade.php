@@ -27,7 +27,7 @@
                                 </a>
                             </h5>
                             <p class="card-text">
-                                {!! Str::limit($post->description, 150) !!}
+                                {{ Str::limit(strip_tags(html_entity_decode($post->description)), 150) }}
                             </p>
                             {{-- <button class="btn btn-link p-0" data-bs-toggle="modal"
                                 data-bs-target="#viewPostModal{{ $post->id }}">Read More</button> --}}
