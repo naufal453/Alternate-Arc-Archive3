@@ -6,7 +6,7 @@
             <select name="sort" id="sort" onchange="this.form.submit()">
                 <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Latest</option>
                 <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest</option>
-
+                <option value="most_liked" {{ request('sort') == 'most_liked' ? 'selected' : '' }}>Most Liked</option>
             </select>
         </form>
         <br>
@@ -33,6 +33,20 @@
                                     <p class="card-text">
                                         {{ Str::limit(strip_tags(html_entity_decode($item->description)), 100) }}
                                     </p>
+                                    <p class="card-text mt-auto">
+                                        <small class="text-body-secondary">
+                                            Created by
+                                            @if ($item->user)
+                                                <a href="{{ route('user.show', ['username' => $item->user->username]) }}"
+                                                    class="user-link">{{ $item->user->username }}</a>
+                                            @else
+                                                <span>Unknown User</span>
+                                            @endif
+                                            on {{ $item->created_at->format('M d, Y') }}
+
+                                        </small>
+                                    </p>
+                                    <br>
                                     <p style="display: flex; align-items: center; gap: 10px;">
                                         <!-- Likes Count -->
                                         <span style="display: flex; align-items: center; gap: 5px;">
@@ -53,19 +67,7 @@
                                             </svg>
                                             <span>{{ $item->comments->count() ?? 0 }}</span>
                                         </span>
-                                    </p>
-                                    <p class="card-text mt-auto">
-                                        <small class="text-body-secondary">
-                                            Created by
-                                            @if ($item->user)
-                                                <a href="{{ route('user.show', ['username' => $item->user->username]) }}"
-                                                    class="user-link">{{ $item->user->username }}</a>
-                                            @else
-                                                <span>Unknown User</span>
-                                            @endif
-                                            on {{ $item->created_at->format('M d, Y') }}
 
-                                        </small>
                                     </p>
                                 </div>
                             </div>

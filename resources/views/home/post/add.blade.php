@@ -45,6 +45,8 @@
 
 <!-- Quill JS -->
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<!-- DOMPurify -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
 
 <script>
     function previewImage(event) {
@@ -94,16 +96,9 @@
             var descriptionInput = document.querySelector('#description');
             var quillContent = quill.root.innerHTML;
 
-            // Sanitize the Quill content
-            var sanitizedContent = sanitizeHTML(quillContent);
+            // Sanitize the Quill content using DOMPurify
+            var sanitizedContent = DOMPurify.sanitize(quillContent);
             descriptionInput.value = sanitizedContent; // Set the sanitized content to the hidden input
         });
-
-        // Function to sanitize HTML content
-        function sanitizeHTML(html) {
-            var tempDiv = document.createElement('div');
-            tempDiv.textContent = html; // Escapes HTML to prevent unwanted tags
-            return tempDiv.innerHTML;
-        }
     });
 </script>

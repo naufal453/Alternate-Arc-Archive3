@@ -16,13 +16,15 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        // Sorting logic
+        // Get the sorting parameter from the request
         $sort = $request->get('sort', 'latest'); // Default is 'latest'
 
         if ($sort == 'oldest') {
-            $posts = Post::orderBy('created_at', 'asc')->get();
+            $posts = Post::withCount('likes')->orderBy('created_at', 'asc')->get();
+        } elseif ($sort == 'most_liked') {
+            $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->get();
         } else {
-            $posts = Post::orderBy('created_at', 'desc')->get();
+            $posts = Post::withCount('likes')->orderBy('created_at', 'desc')->get();
         }
 
         return view('home.index', compact('posts'));
@@ -59,7 +61,8 @@ class PostController extends Controller
 
             $post->save();
 
-            return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+            return redirect()->route('user.show', ['username' => Auth::user()->username])
+                             ->with('success', 'Post created successfully.');
         }
 
     /**

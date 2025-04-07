@@ -19,7 +19,7 @@
 
                     <!-- Content textarea -->
                     <div class="mb-3">
-                        <textarea class="form-control" id="description" name="description" rows="3" required>{{ $post->description }}</textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3" required>{{ (strip_tags(htmlspecialchars_decode($post->description))) }}</textarea>
                     </div>
 
                     <!-- Submit button -->
