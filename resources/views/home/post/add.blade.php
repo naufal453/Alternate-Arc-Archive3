@@ -1,27 +1,29 @@
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+
 <!-- Add Post Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content" style="height: 700px;"> <!-- Set static height here -->
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Story</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="overflow-y: auto; max-height: calc(100% - 120px);"> <!-- Scrollable body -->
                 <form action="{{ url('posts') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <!-- Title input -->
                     <div class="mb-3">
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title"
-                            maxlength="100" required />
+                            maxlength="45" required />
                     </div>
 
-                    <!-- Content textarea -->
-                    <div class="mb-3">
-                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Write your content here"
-                            required></textarea>
-                    </div>
-
+                    <!-- Quill Editor -->
+                    <div id="quill-editor" style="height: 350px;"></div>
+                    <input type="hidden" id="description" name="description">
+                    <!-- Hidden input to store the content -->
+                    <br>
                     <!-- Image upload with preview -->
                     <div class="input-group mb-3">
                         <input class="form-control" type="file" id="image" name="image" accept="image/*"
@@ -32,16 +34,17 @@
                         <img id="imagePreview" src="#" alt="Image Preview"
                             style="display: none; max-width: 100%; height: auto; border-radius: 10px;" />
                     </div>
-
-                    <!-- Submit button -->
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
             </div>
+            <div class="modal-footer"> <!-- Static footer -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form> <!-- Move the closing form tag here -->
         </div>
     </div>
 </div>
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 
 <script>
     function previewImage(event) {
@@ -62,4 +65,45 @@
             preview.style.display = 'none';
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Quill
+        var quill = new Quill('#quill-editor', {
+            theme: 'snow', // Use the 'snow' theme
+            placeholder: 'Write your content here...',
+            modules: {
+                toolbar: [
+                    [{
+                        header: [1, 2, false]
+                    }],
+                    ['bold', 'italic', 'underline'],
+                    ['link', 'image'],
+                    [{
+                        list: 'ordered'
+                    }, {
+                        list: 'bullet'
+                    }],
+                    ['clean'] // Remove formatting
+                ]
+            }
+        });
+
+        // Sync Quill content with the hidden input
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function() {
+            var descriptionInput = document.querySelector('#description');
+            var quillContent = quill.root.innerHTML;
+
+            // Sanitize the Quill content
+            var sanitizedContent = sanitizeHTML(quillContent);
+            descriptionInput.value = sanitizedContent; // Set the sanitized content to the hidden input
+        });
+
+        // Function to sanitize HTML content
+        function sanitizeHTML(html) {
+            var tempDiv = document.createElement('div');
+            tempDiv.textContent = html; // Escapes HTML to prevent unwanted tags
+            return tempDiv.innerHTML;
+        }
+    });
 </script>

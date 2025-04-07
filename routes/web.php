@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,6 @@ Route::delete('/likes', [LikeController::class, 'destroy'])->name('likes.destroy
 
 // Chapters (using resource routes properly)
 Route::resource('chapters', ChapterController::class)->except(['create', 'edit']);
+
+// Search
+Route::get('/search', [SearchController::class, 'search'])->name('search.results');

@@ -16,7 +16,7 @@ class ChapterController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string|max:5000',
+            'content' => 'required|string|max:10000',
             'post_id' => 'required|exists:posts,id',
         ]);
 
