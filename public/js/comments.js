@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     newComment.id = `comment-${data.comment.id}`;
                     newComment.innerHTML = `
                         <div class="card-body">
-                            <h5>${data.comment.user.username} ${
+                            <h5>${escapeHTML(data.comment.user.username)} ${
                         data.comment.user.id === data.auth_user_id ? '<span>(me)</span>' : ''
                     }</h5>
-                            <p>${data.comment.content}</p>
-                            <small>${data.comment.created_at}</small>
+                            <p>${escapeHTML(data.comment.content)}</p>
+                            <small>${escapeHTML(data.comment.created_at)}</small>
                             <br>
                             ${
                                 data.comment.user.id === data.auth_user_id
@@ -78,3 +78,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
     });
 });
+
+function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}

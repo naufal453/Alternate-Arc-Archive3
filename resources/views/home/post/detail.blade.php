@@ -85,21 +85,6 @@
                         <p style="text-align: start; margin-bottom: 0;">
                             <a href="{{ route('chapters.show', $chapter->id) }}">{{ $chapter->title }}</a>
                         </p>
-                        {{-- Check if the authenticated user is the owner of the chapter --}}
-                        @if (auth()->id() === $chapter->user_id)
-                            {{-- Delete Chapter Button --}}
-                            <button type="button" class="btn btn-danger btn-sm mt-2"
-                                onclick="showConfirmation({{ $chapter->id }}, '{{ $chapter->title }}')">
-                                Delete
-                            </button>
-
-                            {{-- Hidden Form for Deletion --}}
-                            <form id="delete-form-{{ $chapter->id }}" method="POST"
-                                action="{{ route('chapters.destroy', $chapter->id) }}" style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-                        @endif
                     </li>
                 @endforeach
             </ul>

@@ -3,12 +3,12 @@
     @forelse($post->comments as $comment)
         <div class="card mb-3">
             <div class="card-body">
-                <h5>{{ $comment->user->username }}
+                <h5>{!! $comment->user->username !!}
                     @if (Auth::id() === $comment->user_id)
                         <span>(me)</span>
                     @endif
                 </h5>
-                <p>{{ $comment->content }}</p>
+                <p>{!! $comment->content !!}</p> <!-- Escape output -->
                 <small>{{ $comment->created_at->format('d M Y, H:i') }}</small>
                 <br>
                 {{-- Delete Button --}}
