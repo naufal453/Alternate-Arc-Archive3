@@ -49,7 +49,11 @@
                                 </button>
                                 <ul class="shadow rounded dropdown-menu" aria-labelledby="dropdownMenuButton{{ $post->id }}" style="min-width: 80px;">
                                     <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                    </form>
                                 </ul>
                             </div>
                             @endif

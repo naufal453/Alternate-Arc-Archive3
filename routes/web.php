@@ -45,6 +45,7 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('home.post.detai
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // Comments
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
