@@ -39,6 +39,7 @@
                 @foreach ($user->posts as $post)
                     <div class="col">
                         <div class="card h-100 d-flex flex-row align-items-center p-3 position-relative  shadow-sm rounded">
+                            @if (auth()->id() == $post->user_id)
                             <!-- Dropdown Menu -->
                             <div class="dropdown position-absolute top-0 end-0 m-2">
                                 <button class="btn" type="button" id="dropdownMenuButton{{ $post->id }}" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,9 +52,9 @@
                                     <li><a class="dropdown-item" href="#">Delete</a></li>
                                 </ul>
                             </div>
-
+                            @endif
                             @if ($post->image_path)
-                                <img src="{{ asset('storage/' . $post->image_path) }}" class="rounded me-3" alt="Post Image" style="width: 160px; height: 160px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $post->image_path) }}" class="rounded me-3" alt="Post Image" style="width: 100px; height: 160px; object-fit: cover;">
                             @else
                                 <div class="rounded bg-secondary me-3" style="width: 80px; height: 80px;"></div>
                             @endif
