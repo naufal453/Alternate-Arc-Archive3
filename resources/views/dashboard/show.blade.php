@@ -47,9 +47,9 @@
                                         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                     </svg>
                                 </button>
-                                <ul class="shadow rounded dropdown-menu" aria-labelledby="dropdownMenuButton{{ $post->id }}" style="min-width: 80px;">
+                                <ul class="shadow rounded dropdown-menu" aria-labelledby="dropdownMenuButton{{ $post->id }}" style="min-width: 80px;min-height: 0px;">
                                     <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                    <form action="{{ route('posts.destroy', $post->id) }}" style="min-width: 80px;min-height: 0px;" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="dropdown-item text-danger">Delete</button>
