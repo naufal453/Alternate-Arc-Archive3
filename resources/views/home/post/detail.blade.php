@@ -18,7 +18,10 @@
                 <h6 class="text-uppercase">by <strong>{{ $post->user->username }}</strong></h6>
                 <p>{{ $post->created_at->format('M d, Y') }}</p>
 
-                <p class="post-description">{{ strip_tags(html_entity_decode($post->description)) }}</p>
+                <div class="post-description">{!! $post->description !!}</div>
+
+
+
 
                 <div class="d-flex align-items-center mt-3">
                     @if (auth()->check())
