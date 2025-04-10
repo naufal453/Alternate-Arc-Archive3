@@ -1,0 +1,31 @@
+#like-button {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#like-button:active {
+    transform: scale(0.95);
+}
+
+body {
+    background-color: #fff5e4 !important;
+}
+
+.main-content {
+    padding: 30px;
+}
+
+.post-description {
+    line-height: 1.6;
+    word-wrap: break-word;
+    max-width: 65ch;
+}
+
+.book-cover {
+    height: 450px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+    padding-left: 40px;
+}
