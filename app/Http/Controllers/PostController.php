@@ -61,6 +61,10 @@ class PostController extends Controller
 
             $post->save();
 
+            if ($request->has('genres')) {
+                $post->genres()->attach($request->genres);
+            }
+
             return redirect()->route('user.show', ['username' => Auth::user()->username])
                              ->with('success', 'Post created successfully.');
         }

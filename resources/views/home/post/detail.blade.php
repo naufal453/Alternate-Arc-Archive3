@@ -17,6 +17,11 @@
                 <h1>{{ $post->title }}</h1>
                 <h6 class="text-uppercase">by <strong>{{ $post->user->username }}</strong></h6>
                 <p>{{ $post->created_at->format('M d, Y') }}</p>
+                <div class="mb-2">
+                    @foreach ($post->genres as $genre)
+                        <span class="badge bg-secondary me-1">{{ $genre->name }}</span>
+                    @endforeach
+                </div>
 
                 <div class="post-description">{!! $post->description !!}</div>
 
