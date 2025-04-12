@@ -50,7 +50,8 @@
 </div>
 
 {{-- Add Comment Form --}}
-<form id="comment-form" action="{{ route('comments.store') }}" method="POST" class="mt-4" style="margin-bottom: 100px;">
+<form id="comment-form" action="{{ route('comments.store') }}" method="POST" class="mt-4"
+    style="margin-bottom: 100px;">
     @csrf
     <div class="mb-3">
         <label for="content" class="form-label">Add a Comment</label>

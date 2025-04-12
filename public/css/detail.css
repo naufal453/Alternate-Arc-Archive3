@@ -18,6 +18,19 @@ body {
     line-height: 1.6;
     word-wrap: break-word;
     max-width: 65ch;
+    position: relative;
+}
+
+.post-description.collapsed {
+    max-height: 4.8em; /* Show about 3 lines of text */
+    overflow: hidden;
+}
+
+.read-more-btn {
+    color: #007bff;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
 }
 
 .book-cover {
@@ -97,4 +110,22 @@ body {
     background-color: #dc3545;
     border-color: #dc3545;
 }
+
+/* List Example Navigation Styles */
+.list-group-item {
+    text-align: center;
+
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    width: 250px;
+    margin-left: 75px;
+
+}
+.list-group-item:hover {
+    background-color: #e2e6ea;
+}
+
+
 

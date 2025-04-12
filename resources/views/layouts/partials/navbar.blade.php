@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-<nav class="navbar bg-body-tertiary navbar-expand-lg fixed-top shadow p-3 mb-5 rounded"
+<nav class="navbar bg-body-tertiary navbar-expand-lg fixed-top shadow-sm p-3 mb-5 rounded"
     style="background-color: #6A9C89 !important; border-radius: 0px !important;">
     <div class="container-fluid">
         <!-- Brand -->
