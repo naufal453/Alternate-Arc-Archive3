@@ -75,12 +75,12 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('posts.saved') }}">
-                                    <i class="bi bi-bookmark me-2"></i> Saved Posts
+                                    <i class="bi bi-bookmark me-2"></i> Saved Stories
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('posts.archived') }}">
-                                    <i class="bi bi-archive me-2"></i> Archived Posts
+                                    <i class="bi bi-archive me-2"></i> Archived Stories
                                 </a>
                             </li>
                             <li>

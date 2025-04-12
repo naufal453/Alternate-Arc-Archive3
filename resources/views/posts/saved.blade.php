@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="p-5 rounded">
-        <h1>Saved Posts</h1>
+        <h1>Saved Stories</h1>
         <hr>
 
         @if ($posts->isEmpty())
