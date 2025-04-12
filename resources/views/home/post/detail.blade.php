@@ -11,7 +11,7 @@
                     <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post Image"
                         class="img-fluid book-cover mb-3 shadow-sm">
                 @endif
-                <div id="list-example mb-3" class="list-group sticky-top" style="top: 20px;">
+                <div id="list-example mb-3" id="chapter-list" class="list-group sticky-top" style="top: 20px;">
                     <a class="list-group-item list-group-item-action shadow-sm" href="#chapters-section">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-book" viewBox="0 0 16 16">
