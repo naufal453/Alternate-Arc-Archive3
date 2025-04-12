@@ -11,7 +11,7 @@
     <body>
         <div class="container">
             <h1>404 Not Found</h1>
-            <h2>HAYOOO MAU BUKA APAAN</h2>
+            <h2>HAYOOO MAU BUKA APA</h2>
             <p>Sorry, the page you are looking for could not be found.</p>
             <a href="{{ url('/') }}">Return to Home</a>
         </div>
