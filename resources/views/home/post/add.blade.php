@@ -20,7 +20,7 @@
                     </div>
 
                     <!-- Genre checklist -->
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label class="form-label">Genres</label>
                         <div class="genre-checklist">
                             <div class="form-check">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <div class="form-text">Check all genres that apply to your post</div>
-                    </div>
+                    </div> --}}
                     <style>
                         .genre-checklist {
                             background: #f8f9fa;

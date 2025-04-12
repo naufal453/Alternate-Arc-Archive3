@@ -74,6 +74,16 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="dropdown-item" href="{{ route('posts.saved') }}">
+                                    <i class="bi bi-bookmark me-2"></i> Saved Posts
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('posts.archived') }}">
+                                    <i class="bi bi-archive me-2"></i> Archived Posts
+                                </a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item"
                                     href="{{ route('user.usersettings', ['username' => auth()->user()->username]) }}">
                                     <i class="bi bi-gear me-2"></i> Settings

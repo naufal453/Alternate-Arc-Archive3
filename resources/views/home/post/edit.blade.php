@@ -2,7 +2,6 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-
 <!-- Edit Post Modal -->
 <div class="modal fade" id="editPostModal{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="editPostModalLabel{{ $post->id }}" aria-hidden="true">
@@ -41,11 +40,9 @@
     </div>
 </div>
 
-
 <!-- Quill Initialization Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-
         const quill{{ $post->id }} = new Quill('#editor{{ $post->id }}', {
             theme: 'snow',
             modules: {
@@ -70,6 +67,5 @@
             const html = quill{{ $post->id }}.root.innerHTML;
             document.querySelector('#description{{ $post->id }}').value = html;
         });
-
     });
 </script>

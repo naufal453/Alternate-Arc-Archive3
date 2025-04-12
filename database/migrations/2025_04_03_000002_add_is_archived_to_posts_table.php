@@ -9,14 +9,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('genre');
+            $table->boolean('is_archived')->default(false);
         });
     }
 
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('genre')->nullable();
+            $table->dropColumn('is_archived');
         });
     }
 };

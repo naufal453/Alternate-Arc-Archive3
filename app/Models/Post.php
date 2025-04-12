@@ -11,15 +11,11 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'description',
+        'description', 
         'user_id',
         'image_path',
+        'is_archived',
     ];
-
-    public function genres()
-    {
-        return $this->belongsToMany(Genre::class);
-    }
 
     public function user()
     {
@@ -39,5 +35,15 @@ class Post extends Model
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'saved_posts');
+    }
+
+    public function archivedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'archived_posts');
     }
 }
