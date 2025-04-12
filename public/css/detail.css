@@ -26,6 +26,27 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Make sidebar image sticky */
+.col-md-4 {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    align-self: flex-start;
+}
+
+/* Ensure main content doesn't get hidden behind sticky sidebar */
+.col-md-8 {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 767.98px) {
+    .col-md-4 {
+        position: static;
+    }
+}
+
 .info-section {
     padding-left: 40px;
 }
+

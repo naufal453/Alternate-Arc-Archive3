@@ -99,13 +99,3 @@
         </div>
     </div>
 @endsection
-
-<script src="{{ asset('js/like-button.js') }}"></script>
-<script>
-    function showConfirmation(chapterId, chapterTitle) {
-        const confirmation = confirm(`Are you sure you want to delete the chapter "${chapterTitle}"?`);
-        if (confirmation) {
-            document.getElementById(`delete-form-${chapterId}`).submit();
-        }
-    }
-</script>
