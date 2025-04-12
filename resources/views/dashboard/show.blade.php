@@ -52,6 +52,16 @@
                                     <ul class="shadow rounded dropdown-menu"
                                         aria-labelledby="dropdownMenuButton{{ $post->id }}"
                                         style="min-width: 80px;min-height: 0px;">
+
+
+                                        <li>
+                                            <button class="dropdown-item btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#editPostModal{{ $post->id }}">Edit</button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btn-success" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#chapterListModal{{ $post->id }}">Detail</button>
+                                        </li>
                                         <li>
                                             <form
                                                 action="{{ $post->is_archived ? route('posts.unarchive', $post->id) : route('posts.archive', $post->id) }}"
@@ -62,37 +72,39 @@
                                                 </button>
                                             </form>
                                         </li>
-                                        <form action="{{ route('posts.destroy', $post->id) }}"
-                                            style="min-width: 80px;min-height: 0px;" method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete this post?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item text-danger">Delete</button>
-                                        </form>
+                                        <li>
+                                            <form action="{{ route('posts.destroy', $post->id) }}"
+                                                style="min-width: 80px;min-height: 0px;" method="POST"
+                                                onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             @endif
-                            <!-- Rest of the file content remains unchanged -->
                             @if ($post->image_path)
-                                <img src="{{ asset('storage/' . $post->image_path) }}" class="rounded me-3" alt="Post Image"
-                                    style="width: 100px; height: 160px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $post->image_path) }}" class="rounded me-3"
+                                    alt="Post Image" style="width: 100px; height: 160px; object-fit: cover;">
                             @else
                                 <div class="rounded bg-secondary me-3" style="width: 80px; height: 80px;"></div>
                             @endif
-                            <div class="flex-grow-1">
-                                <h6 class="mb-1">
+                            <div class="flex-grow-1 position-relative">
+                                <h6 class="top-0 start-50 " style="margin-top: 0px;">
                                     <a href="{{ route('home.post.detail', ['id' => $post->id]) }}"
                                         class="text-decoration-none text-dark">
                                         {{ Str::limit($post->title, 20) }}
                                     </a>
                                 </h6>
+
                                 <p style="font-size: 0.9em;" class="mb-1 text-muted">
-                                    {{ Str::limit(strip_tags(html_entity_decode($post->description)), 5) }}</p>
+                                    {{ Str::limit(strip_tags(html_entity_decode($post->description)), 30) }}</p>
                                 <small style="font-size: 0.8em;" class="text-body-secondary">Posted
                                     {{ \Carbon\Carbon::parse($post->updated_at)->diffForHumans() }}</small>
                             </div>
                             @if (auth()->id() == $post->user_id)
-                                <div class="ms-3 d-flex flex-column ">
+                                <div class="ms-3 d-flex flex-column " style="margin-right: 10px">
                                     <span style="display: flex; align-items: center; gap: 5px;">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
@@ -119,12 +131,6 @@
                                         <span>{{ $post->comments->count() ?? 0 }}</span>
                                     </span>
                                 </div>
-                                <div class="ms-3 d-flex flex-column">
-                                    <button class="btn btn-warning btn-sm mb-1" data-bs-toggle="modal"
-                                        data-bs-target="#editPostModal{{ $post->id }}">Edit</button>
-                                    <button class="btn btn-success btn-sm mb-1" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#chapterListModal{{ $post->id }}">Detail</button>
-                                </div>
                             @endif
                         </div>
                     </div>
@@ -142,6 +148,31 @@
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <!-- DOMPurify -->
 <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Refresh when returning from modals
+            if (window.performance && performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+                window.location.reload();
+            }
+
+            // Listen for storage events (cross-tab sync)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'post-updated') {
+                    window.location.reload();
+                }
+            });
+
+            // Update local storage when modals are closed
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('hidden.bs.modal', function() {
+                    localStorage.setItem('post-updated', Date.now());
+                });
+            });
+        });
+    </script>
+@endpush
 
 
 <script id="postsData" type="application/json">

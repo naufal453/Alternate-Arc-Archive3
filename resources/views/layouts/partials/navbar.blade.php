@@ -66,7 +66,7 @@
                         </button>
 
                         <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 200px;">
+                        <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 125px;">
                             <li>
                                 <a class="dropdown-item"
                                     href="{{ route('user.show', ['username' => auth()->user()->username]) }}">
@@ -75,12 +75,12 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('posts.saved') }}">
-                                    <i class="bi bi-bookmark me-2"></i> Saved Stories
+                                    <i class="bi bi-bookmark me-2"></i> Saved
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('posts.archived') }}">
-                                    <i class="bi bi-archive me-2"></i> Archived Stories
+                                    <i class="bi bi-archive me-2"></i> Archived
                                 </a>
                             </li>
                             <li>

@@ -1,4 +1,10 @@
 <body>
+    <div class="position-relative mb-5">
+        <div class="container px-0">
+            <img class="img-fluid w-100 rounded shadow" style="max-height: 300px; object-fit: cover;"
+                src="{{ asset('images/banner.png') }}" alt="Alternate Arc Archive Banner">
+        </div>
+    </div>
     @auth
         <!-- Sorting Form -->
         <form method="GET" action="{{ route('home.index') }}">
@@ -15,7 +21,7 @@
                 <div class="col">
                     <!-- Card for larger devices -->
                     <div class="card d-none d-md-flex mb-2 shadow-sm p-3 bg-body-tertiary rounded"
-                        style="width: 540px;margin-left:0px;"
+                        style="width: 540px;margin-left:5%;"
                         onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         <div class="row g-0">
                             <div class="col-md-4">

@@ -18,7 +18,7 @@ class PostManagementController extends BaseController
     {
         $post = Post::findOrFail($id);
         auth()->user()->savedPosts()->detach($post->id);
-        return $this->successResponse('posts.show', 'Post removed from saved', ['id' => $id]);
+        return $this->successResponse('posts.saved', 'Post removed from saved', ['id' => $id]);
     }
 
     public function archivePost($id)

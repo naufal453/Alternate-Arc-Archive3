@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/show.css') }}">
 
 @section('content')
-    <div class="p-5 rounded">
+    <div class="p-5 rounded" id="saved-posts-container">
         <h1>Saved Stories</h1>
         <hr>
 
@@ -21,7 +21,7 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-three-dots"></i>
                                 </button>
-                                <ul class="shadow rounded dropdown-menu"
+                                <ul class="shadow rounded dropdown-menu" style="min-width: 75px !important;"
                                     aria-labelledby="dropdownMenuButton{{ $post->id }}">
                                     <li>
                                         <form action="{{ route('posts.unsave', $post->id) }}" method="POST">
@@ -48,9 +48,7 @@
                                 </h6>
                                 <p class="mb-1 text-muted" style="font-size: 0.9em;">
                                     {{ Str::limit(strip_tags(html_entity_decode($post->description)), 50) }}</p>
-                                <small class="text-body-secondary" style="font-size: 0.8em;">
-                                    Saved {{ $post->pivot?->created_at?->diffForHumans() ?? 'recently' }}
-                                </small>
+
                             </div>
 
                             <div class="ms-3 d-flex flex-column">
@@ -75,3 +73,62 @@
         @endif
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // If opened in popup/modal, refresh parent and close
+            if (window.opener) {
+                window.opener.location.reload();
+                window.close();
+                return;
+            }
+
+            // Handle form submissions via AJAX
+            const forms = document.querySelectorAll('form[action*="/posts/unsave"]');
+
+            forms.forEach(form => {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.innerHTML;
+                    button.disabled = true;
+                    button.innerHTML =
+                        '<span class="spinner-border spinner-border-sm" role="status"></span> Updating...';
+
+                    try {
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]').content,
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({})
+                        });
+
+                        if (response.ok) {
+                            // Remove the card from UI
+                            this.closest('.col').remove();
+
+                            // If no posts left, show empty message
+                            if (document.querySelectorAll('.col').length === 0) {
+                                document.querySelector('#saved-posts-container').innerHTML = `
+                                <div class="text-center">
+                                    <p class="text-muted">You have no saved posts.</p>
+                                </div>
+                            `;
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

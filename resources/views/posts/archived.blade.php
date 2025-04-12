@@ -56,9 +56,7 @@
                                 </h6>
                                 <p class="mb-1 text-muted" style="font-size: 0.9em;">
                                     {{ Str::limit(strip_tags(html_entity_decode($post->description)), 50) }}</p>
-                                <small class="text-body-secondary" style="font-size: 0.8em;">
-                                    Archived {{ $post->updated_at->diffForHumans() }}
-                                </small>
+
                             </div>
 
                             <div class="ms-3 d-flex flex-column">
