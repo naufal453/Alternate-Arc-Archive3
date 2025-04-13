@@ -64,7 +64,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $result->title ?? 'Unknown Title' }}</h5>
                                 <p class="card-text">
-                                    {{ Str::limit($result->description ?? 'No description available', 100) }}
+                                    {!! Str::limit($result->description ?? 'No description available', 100) !!}
                                 </p>
                                 <p class="card-text">
                                     <small class="text-body-secondary">
