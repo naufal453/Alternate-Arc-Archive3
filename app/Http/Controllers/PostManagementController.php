@@ -11,14 +11,14 @@ class PostManagementController extends BaseController
     {
         $post = Post::findOrFail($id);
         auth()->user()->savedPosts()->syncWithoutDetaching([$post->id]);
-        return $this->successResponse('Post saved successfully', ['id' => $id]);
+        return back()->with('Post removed from saved', ['id' => $id]);
     }
 
     public function unsavePost($id)
     {
         $post = Post::findOrFail($id);
         auth()->user()->savedPosts()->detach($post->id);
-        return $this->successResponse('Post removed from saved', ['id' => $id]);
+        return back()->with('Post removed from saved', ['id' => $id]);
     }
 
     public function archivePost($id)
