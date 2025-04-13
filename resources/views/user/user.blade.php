@@ -20,8 +20,7 @@
             @foreach ($posts as $item)
                 <div class="col">
                     <!-- Card for larger devices -->
-                    <div class="card d-none d-md-flex mb-2 shadow-sm p-3 bg-body-tertiary rounded"
-                        style="width: 540px;margin-left:5%;"
+                    <div class="card mb-2 shadow-sm p-3 bg-body-tertiary rounded w-100"
                         onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -81,7 +80,7 @@
                     </div>
 
                     <!-- Card for smaller devices -->
-                    <div class="card d-md-none mb-2"
+                    <div class="card d-md-none mb-2 shadow-sm p-3 bg-body-tertiary rounded"
                         onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         @if ($item->image_path)
                             <img src="{{ asset('storage/' . $item->image_path) }}" class="card-img-top" alt="Post Image">
