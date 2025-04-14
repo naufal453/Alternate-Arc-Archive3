@@ -13,35 +13,15 @@
                 <br>
                 {{-- Delete Button --}}
                 @if (Auth::id() === $comment->user_id)
-                    <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $comment->id }}">
-                        Delete
-                    </button>
+                    <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm" type="button"
+                            onclick="if(confirm('Are you sure you want to delete this comment?')) { this.form.submit(); }">
+                            Delete
+                        </button>
+                    </form>
                 @endif
-
-                {{-- Delete Confirmation Modal --}}
-                <div class="modal fade" id="deleteModal{{ $comment->id }}" tabindex="-1"
-                    aria-labelledby="deleteModalLabel{{ $comment->id }}" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel{{ $comment->id }}">Confirm Delete</h5>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to delete this comment?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     @empty
@@ -58,7 +38,13 @@
         <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
     </div>
     <input type="hidden" name="post_id" value="{{ $post->id }}">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    @guest
+        <button data-bs-toggle="modal" data-bs-target="#guestActionModal" type="submit"
+            class="btn btn-primary">Submit</button>
+    @endguest
+    @auth
+        <button type="submit" class="btn btn-primary">Submit</button>
+    @endauth
 </form>
 
 {{-- Include External JavaScript --}}
