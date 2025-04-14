@@ -1,4 +1,18 @@
 @guest
+    <style>
+        .fixed-card-size {
+            width: 350px;
+            height: 335px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 576px) {
+            .fixed-card-size {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
     <!-- Sorting Form -->
     <form method="GET" action="{{ route('home.index') }}">
         <label for="sort">Sort by:</label>

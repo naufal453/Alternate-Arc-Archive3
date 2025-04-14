@@ -1,4 +1,18 @@
 <body>
+    <style>
+        .fixed-card-size {
+            width: 350px;
+            height: 335px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 576px) {
+            .fixed-card-size {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
     <div class="position-relative mb-5">
         <div class="container px-0">
             <img class="img-fluid w-100 rounded shadow" style="max-height: 300px; object-fit: cover;"
@@ -19,20 +33,16 @@
         <div class="row row-cols-1 row-cols-md-2 g-3">
             @foreach ($posts as $item)
                 <div class="col">
-                    <div class="card mb-2 shadow-sm p-3 bg-body-tertiary rounded w-100"
+                    <div class="card mb-2 shadow-sm p-3 bg-body-tertiary rounded w-100 fixed-card-size"
                         onclick="window.location='{{ route('home.post.detail', ['id' => $item->id]) }}'">
                         <div class="d-flex flex-column flex-md-row">
                             <div class="d-flex justify-content-center mb-3 mb-md-0 me-md-3">
                                 @if ($item->image_path)
-                                    <img src="{{ asset('storage/' . $item->image_path) }}"
-                                         class="img-fluid rounded"
-                                         alt="Post Image"
-                                         style="max-width:250px;height: 300px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $item->image_path) }}" class="img-fluid rounded"
+                                        alt="Post Image" style="max-width:250px;height: 300px; object-fit: cover;">
                                 @else
-                                    <img src="..."
-                                         class="img-fluid rounded"
-                                         alt="Default Image"
-                                         style="max-height: 250px; object-fit: cover;">
+                                    <img src="..." class="img-fluid rounded" alt="Default Image"
+                                        style="max-height: 250px; object-fit: cover;">
                                 @endif
                             </div>
                             <div class="flex-grow-1">
