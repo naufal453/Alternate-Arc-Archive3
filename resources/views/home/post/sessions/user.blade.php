@@ -101,13 +101,14 @@
                 @else
                     <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
                         class="scrollspy-example overflow-auto" tabindex="0" style="height: 150px;">
-                        <ol class="list-group list-group-numbered list-group-flush mb-5">
+                        <ul class="list-group list-group-flush mb-5">
                             @foreach ($chapters as $chapter)
                                 <li class="list-group-item bg-transparent border-0">
+                                    Chapter {{ $loop->iteration }}:
                                     <a href="{{ route('chapters.show', $chapter->id) }}">{{ $chapter->title }}</a>
                                 </li>
                             @endforeach
-                        </ol>
+                        </ul>
                     </div>
                 @endif
 

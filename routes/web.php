@@ -12,30 +12,35 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SearchController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
 
+// Add a named route 'login' to fix the "Route [login] not defined" error
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+
+// Add a named route 'register' to align with login route naming
+Route::get('/register', [RegisterController::class, 'show'])->name('register');
+
+
 // Home route
 Route::get('/', [PostController::class, 'index'])->name('home.index');
 
 // Guest middleware routes
 Route::middleware(['guest'])->group(function () {
-    Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+    // Removed duplicate register.show route to avoid conflicts
     Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
 
-    Route::get('/login', [LoginController::class, 'show'])->name('login.show');
+    // Removed duplicate login.show route to avoid conflicts
     Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 });
 
 // Auth middleware routes
 Route::middleware(['auth'])->group(function () {
-Route::get('/test-image', function() {
-    $path = 'profile_pictures/1744415868_ChatGPT Image Apr 12 2025 04_00_00 AM (1).png';
-    return redirect(asset(str_replace(' ', '%20', 'storage/'.$path)));
-});
+
 
 Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
     Route::get('/user/{username}', [UserController::class, 'show'])->name('user.show');
@@ -45,7 +50,7 @@ Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perfor
 
     // Posts resource with proper auth protection
     Route::resource('posts', PostController::class)->except(['index', 'show']);
-    
+
     // Post management routes
     Route::post('/posts/{id}/save', [PostManagementController::class, 'savePost'])->name('posts.save');
     Route::post('/posts/{id}/unsave', [PostManagementController::class, 'unsavePost'])->name('posts.unsave');

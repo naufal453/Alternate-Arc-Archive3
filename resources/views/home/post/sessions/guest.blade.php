@@ -16,8 +16,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Browsing</button>
-                    <a href="{{ route('register.show') }}" class="btn btn-primary">Sign Up</a>
-                    <a href="{{ route('login.show') }}" class="btn btn-outline-primary">Log In</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary">Log In</a>
                 </div>
             </div>
         </div>
@@ -95,13 +95,14 @@
                 @else
                     <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
                         class="scrollspy-example overflow-auto" tabindex="0" style="height: 150px;">
-                        <ol class="list-group list-group-numbered list-group-flush mb-5">
+                        <ul class="list-group list-group-flush mb-5">
                             @foreach ($chapters as $chapter)
-                                <li class="list-group-item bg-transparent border-0">
+                                <li class="list-group-item bg-transparent border-0" style="list-style: none">
+                                    Chapter {{ $loop->iteration }}:
                                     <a href="{{ route('chapters.show', $chapter->id) }}">{{ $chapter->title }}</a>
                                 </li>
                             @endforeach
-                        </ol>
+                        </ul>
                     </div>
                 @endif
 

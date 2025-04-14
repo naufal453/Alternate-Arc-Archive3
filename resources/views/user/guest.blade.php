@@ -34,8 +34,7 @@
                                     <small class="text-body-secondary">
                                         Created by
                                         @if ($item->user)
-                                            <a href="{{ route('user.show', ['username' => $item->user->username]) }}"
-                                                class="user-link">{{ $item->user->username }}</a>
+                                            <p>{{ $item->user->username }}</p>
                                         @else
                                             <span>Unknown User</span>
                                         @endif
