@@ -55,7 +55,7 @@
                                         on {{ $item->created_at->format('M d, Y') }}
                                     </small>
                                 </p>
-                                <br>
+
                                 <p style="display: flex; align-items: center; gap: 10px;">
                                     <!-- Likes Count -->
                                     <span style="display: flex; align-items: center; gap: 5px;">
