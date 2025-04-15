@@ -19,7 +19,7 @@
                     <!-- Title input -->
                     <div class="mb-3">
                         <input type="text" class="form-control" name="title" value="{{ $post->title }}"
-                            required />
+                            maxlength="45" required />
                     </div>
 
                     <!-- Quill editor -->

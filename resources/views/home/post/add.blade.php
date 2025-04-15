@@ -18,54 +18,6 @@
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title"
                             maxlength="45" required />
                     </div>
-
-                    <!-- Genre checklist -->
-                    {{-- <div class="mb-3">
-                        <label class="form-label">Genres</label>
-                        <div class="genre-checklist">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-fantasy" name="genres[]"
-                                    value="1">
-                                <label class="form-check-label" for="genre-fantasy">Fantasy</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-scifi" name="genres[]"
-                                    value="2">
-                                <label class="form-check-label" for="genre-scifi">Sci-Fi</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-romance" name="genres[]"
-                                    value="3">
-                                <label class="form-check-label" for="genre-romance">Romance</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-mystery" name="genres[]"
-                                    value="4">
-                                <label class="form-check-label" for="genre-mystery">Mystery</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-horror" name="genres[]"
-                                    value="5">
-                                <label class="form-check-label" for="genre-horror">Horror</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-thriller" name="genres[]"
-                                    value="6">
-                                <label class="form-check-label" for="genre-thriller">Thriller</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-adventure" name="genres[]"
-                                    value="7">
-                                <label class="form-check-label" for="genre-adventure">Adventure</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre-other" name="genres[]"
-                                    value="8">
-                                <label class="form-check-label" for="genre-other">Other</label>
-                            </div>
-                        </div>
-                        <div class="form-text">Check all genres that apply to your post</div>
-                    </div> --}}
                     <style>
                         .genre-checklist {
                             background: #f8f9fa;
