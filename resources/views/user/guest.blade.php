@@ -1,18 +1,5 @@
 @guest
-    <style>
-        .fixed-card-size {
-            width: 350px;
-            height: 335px;
-            overflow: hidden;
-        }
 
-        @media (max-width: 576px) {
-            .fixed-card-size {
-                width: 100%;
-                height: auto;
-            }
-        }
-    </style>
     <!-- Sorting Form -->
     <form method="GET" action="{{ route('home.index') }}">
         <label for="sort">Sort by:</label>
@@ -55,7 +42,7 @@
                                         on {{ $item->created_at->format('M d, Y') }}
                                     </small>
                                 </p>
-
+                                <br>
                                 <p style="display: flex; align-items: center; gap: 10px;">
                                     <!-- Likes Count -->
                                     <span style="display: flex; align-items: center; gap: 5px;">
