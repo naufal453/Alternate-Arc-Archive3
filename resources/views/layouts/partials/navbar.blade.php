@@ -68,23 +68,23 @@
                         <!-- Dropdown Menu -->
                         <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 125px;">
                             <li>
-                                <a style="font-size: 20px" class="dropdown-item"
+                                <a style="font-size: 15px" class="dropdown-item"
                                     href="{{ route('user.show', ['username' => auth()->user()->username]) }}">
                                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 20px" class="dropdown-item" href="{{ route('posts.saved') }}">
+                                <a style="font-size: 15px" class="dropdown-item" href="{{ route('posts.saved') }}">
                                     <i class="bi bi-bookmark me-2"></i> Saved
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 20px" class="dropdown-item" href="{{ route('posts.archived') }}">
+                                <a style="font-size: 15px" class="dropdown-item" href="{{ route('posts.archived') }}">
                                     <i class="bi bi-archive me-2"></i> Archived
                                 </a>
                             </li>
                             <li>
-                                <a style="font-size: 20px" class="dropdown-item"
+                                <a style="font-size: 15px" class="dropdown-item"
                                     href="{{ route('user.usersettings', ['username' => auth()->user()->username]) }}">
                                     <i class="bi bi-gear me-2"></i> Settings
                                 </a>
@@ -93,7 +93,8 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a style="font-size: 20px" href="{{ route('logout.perform') }}" class="dropdown-item text-danger">
+                                <a style="font-size: 15px" href="{{ route('logout.perform') }}"
+                                    class="dropdown-item text-danger">
                                     <i class="bi bi-box-arrow-right me-2"></i> Logout
                                 </a>
                             </li>

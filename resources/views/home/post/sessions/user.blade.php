@@ -81,11 +81,11 @@
                             $liked = $post->likes->contains('user_id', auth()->id());
                         @endphp
                         <div class="d-flex align-items-center">
-                            <button id="like-button" class="btn {{ $liked ? 'btn-danger' : 'btn-primary' }} me-2"
+                            <button id="like-button" class="btn {{ $liked ? 'btn-secondary' : 'btn-primary' }} me-2"
                                 data-liked="{{ $liked ? 'true' : 'false' }}" data-post-id="{{ $post->id }}">
-                                <i id="like-icon"
-                                    class="bi {{ $liked ? 'bi-hand-thumbs-down-fill' : 'bi-hand-thumbs-up-fill' }}"></i>
-                                <span id="like-text">{{ $liked ? 'Dislike' : 'Like' }}</span>
+                                <i id="like-icon" class="bi {{ $liked ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up' }}">
+                                </i>
+                                <span id="like-text">{{ $liked ? 'Unlike' : 'Like' }}</span>
                             </button>
 
                             <p id="like-count" class="mb-0">{{ $post->likes->count() }}
