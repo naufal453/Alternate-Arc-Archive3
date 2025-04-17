@@ -62,6 +62,10 @@ class PostController extends BaseController
         $post = Post::with(['user'])->findOrFail($id);
         $chapters = Chapter::where('post_id', $id)->get();
 
+        if ($post->is_archived && auth()->id() !== $post->user_id) {
+            return view('errors.storyarchived');
+        }
+
         return view('home.post.detail', compact('post', 'chapters'));
     }
 
