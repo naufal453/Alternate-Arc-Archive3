@@ -15,7 +15,7 @@
                     <p>This action requires an account. Please sign up or log in to continue.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Browsing</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Reading</button>
                     <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
                     <a href="{{ route('login') }}" class="btn btn-outline-primary">Log In</a>
                 </div>
