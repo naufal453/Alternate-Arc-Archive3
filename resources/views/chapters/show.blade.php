@@ -28,14 +28,22 @@
             </div>
         </div>
         <div class="col-md-8">
+            <h3>{{ $chapter->title }}</h3>
             <div class="post-description mb-5">
-                <h3>{{ $chapter->title }}</h3>
+
                 <div class="collapsed-description">
                     {!! Str::limit($chapter->content, 1000, '...') !!}
                     @if (strlen(strip_tags($chapter->content)) > 1000)
                         <a href="#" class="read-more-toggle btn btn-link p-0">Read More</a>
                     @endif
                 </div>
+
+                @if (strlen(strip_tags($chapter->content)) > 1000)
+                    <div class="full-description d-none">
+                        {!! $chapter->content !!}
+                        <a href="#" class="read-less-toggle btn btn-link p-0">Read Less</a>
+                    </div>
+                @endif
             </div>
         </div>
         @push('scripts')
