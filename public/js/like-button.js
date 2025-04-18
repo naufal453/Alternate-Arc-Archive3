@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         // Update icon and text
                         likeIcon.className = newLiked ? 'bi bi-hand-thumbs-up-fill' : 'bi bi-hand-thumbs-up';
-                        likeText.textContent = newLiked ? 'Unlike' : 'Like';
+                        likeText.textContent = newLiked ? `${data.likes_count}` : `${data.likes_count}`;
 
                         // Update like count
-                        likeCount.textContent = `${data.likes_count} ${data.likes_count === 1 ? 'like' : 'likes'}`;
+                        // likeCount.textContent = `${data.likes_count} ${data.likes_count === 1 ? 'like' : 'likes'}`;
                     }
                 })
                 .catch(error => console.error('Error:', error));
