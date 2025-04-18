@@ -38,6 +38,9 @@
                 </div>
             </div>
         </div>
+        @push('scripts')
+            <script src="{{ asset('js/description-toggle.js') }}"></script>
+        @endpush
         {{-- <div class="container">
         <h1>{{ $chapter->title }}</h1>
         <p>{!! $chapter->content !!}</p> <!-- Render HTML content -->
