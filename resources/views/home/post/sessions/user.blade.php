@@ -2,6 +2,8 @@
     <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <div class="main-content">
         <div class="row align-items-start g-4">
             @include('home.post.sessions.partial')
@@ -72,7 +74,7 @@
                             </button>
 
                             {{-- <p id="like-count" class="mb-0">{{ $post->likes->count() }}
-                                {{ Str::plural('like', $post->likes->count()) }}</p> --}}
+                                    {{ Str::plural('like', $post->likes->count()) }}</p> --}}
                         </div>
                     @endif
                 </div>
@@ -100,6 +102,8 @@
             </div>
         </div>
     </div>
+
+
     @push('scripts')
         <script src="{{ asset('js/description-toggle.js') }}"></script>
     @endpush
