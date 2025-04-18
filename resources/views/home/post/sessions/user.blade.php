@@ -68,13 +68,9 @@
                     </div>
                     <div class="full-description d-none">
                         {!! $post->description !!}
-                        <a href="#" class="read-less-toggle btn btn-link p-0">Read Less</a>
+                        <a id="chapters-section" href="#" class="read-less-toggle btn btn-link p-0">Read Less</a>
                     </div>
                 </div>
-
-
-
-
                 <div class="d-flex align-items-center mt-3">
                     @if (auth()->check())
                         @php
@@ -94,7 +90,7 @@
                     @endif
                 </div>
 
-                <hr id="chapters-section">
+                <hr>
                 <h4>Chapters</h4>
                 @if ($chapters->isEmpty())
                     <p>No chapters available for this post.</p>
