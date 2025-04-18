@@ -28,7 +28,9 @@
             </div>
         </div>
         <div class="col-md-8">
+            <br>
             <h3>{{ $chapter->title }}</h3>
+            <hr>
             <div class="post-description mb-5">
 
                 <div class="collapsed-description">
