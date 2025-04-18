@@ -36,8 +36,9 @@
                             <form action="{{ $saved ? route('posts.unsave', $post->id) : route('posts.save', $post->id) }}"
                                 method="POST" class="me-2">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-outline-secondary">
-                                    <i class="bi {{ $saved ? 'bi-bookmark-check-fill' : 'bi-bookmark' }}"></i>
+                                <button type="submit"
+                                    class="btn btn-sm {{ $saved ? 'btn-secondary' : 'btn-outline-secondary' }}">
+                                    <i class="bi {{ $saved ? 'bi-bookmark-fill' : 'bi-bookmark' }}"></i>
                                     <span class="ms-1">{{ $saved ? 'Saved' : 'Save' }}</span>
                                 </button>
                             </form>
