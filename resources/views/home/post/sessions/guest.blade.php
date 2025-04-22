@@ -42,11 +42,6 @@
                             <span class="ms-1">Save</span>
                         </button>
 
-                        <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
-                            data-bs-target="#guestActionModal">
-                            <i class="bi bi-archive"></i>
-                            <span class="ms-1">Archive</span>
-                        </button>
                     </div>
                 </div>
 
