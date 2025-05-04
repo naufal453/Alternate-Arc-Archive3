@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("title");
             $table->string("description");
+            $table->string("reference");
+            $table->string("genre");
             $table->timestamps();
         });
     }

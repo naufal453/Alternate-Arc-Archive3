@@ -15,6 +15,19 @@
                         <h6 class="text-uppercase">by <strong>{{ $post->user->username }}</strong></h6>
 
                         <p>{{ $post->created_at->format('M d, Y') }}</p>
+                        @if (!empty($post->reference))
+                            <p>Reference:
+                                <a href="https://en.wikipedia.org/wiki/{{ urlencode($post->reference) }}" target="_blank"
+                                    rel="noopener" class="wiki-link">
+                                    <span class="badge bg-secondary">{{ $post->reference }}</span>
+                                </a>
+                                <br>
+                        @endif
+                        Genre:
+                        @foreach (explode(',', $post->genre) as $genre)
+                            <span class="badge bg-secondary">{{ trim($genre) }}</span>
+                        @endforeach
+                        </p>
                     </div>
                     @if (auth()->check())
                         <div class="d-flex">
@@ -103,6 +116,15 @@
         </div>
     </div>
 
+    <style>
+        .wiki-link .badge.bg-secondary:hover,
+        .wiki-link:hover .badge.bg-secondary {
+            background-color: #1a73e8 !important;
+            color: #fff !important;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
 
     @push('scripts')
         <script src="{{ asset('js/description-toggle.js') }}"></script>
