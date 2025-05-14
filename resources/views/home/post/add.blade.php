@@ -22,7 +22,7 @@
                     <!-- Reference input -->
                     <div class="mb-3">
                         <input type="text" class="form-control" id="reference" name="reference"
-                            placeholder="Reference (optional)" maxlength="255" />
+                            placeholder="Reference (optional)" maxlength="255" required />
                     </div>
 
                     <!-- Genre input (as checkboxes or select) -->
