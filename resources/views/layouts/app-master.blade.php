@@ -27,7 +27,7 @@
             s.async = true;
             a.getElementsByTagName('head')[0].appendChild(s);
             m.mazeUniversalSnippetApiKey = e;
-        })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '644ef8da-6a91-4cd0-bcdc-85bed25b1cc8');
+        })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '8ad8cd38-7725-47a9-b036-c96d9a1f114c');
     </script>
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
