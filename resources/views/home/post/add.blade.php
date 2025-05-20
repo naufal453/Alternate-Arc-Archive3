@@ -39,16 +39,28 @@
                                 <option value="Comedy">Comedy</option>
                                 <option value="Horror">Horror</option>
                                 <option value="Sci-Fi">Sci-Fi</option>
+                                <option value="Thriller">Thriller</option>
                                 <option value="Other">Other</option>
                                 @foreach ($genres ?? [] as $genre)
-                                    @if (!in_array($genre->name, ['Fantasy', 'Drama', 'Action', 'Romance', 'Comedy', 'Horror', 'Sci-Fi', 'Other']))
+                                    @if (
+                                        !in_array($genre->name, [
+                                            'Fantasy',
+                                            'Drama',
+                                            'Action',
+                                            'Romance',
+                                            'Comedy',
+                                            'Horror',
+                                            'Sci-Fi',
+                                            'Thriller',
+                                            'Other',
+                                        ]))
                                         <option value="{{ $genre->name }}">{{ $genre->name }}</option>
                                     @endif
                                 @endforeach
                             </select>
-                            <span class="mx-2">or</span>
+                            {{-- <span class="mx-2">or</span>
                             <input type="text" class="form-control w-auto" id="genre_custom" name="genre_custom"
-                                placeholder="Add new (max 10)" maxlength="10" style="min-width: 180px;" />
+                                placeholder="Add new (max 10)" maxlength="10" style="min-width: 180px;" /> --}}
                         </div>
                     </div>
 
