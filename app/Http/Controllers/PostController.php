@@ -76,14 +76,20 @@ class PostController extends BaseController
 
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->view('errors.404', ['errorType' => 'post'], 404);
+        }
         $this->authorize('update', $post);
         return view('home.post.edit', compact('post'));
     }
 
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->view('errors.404', ['errorType' => 'post'], 404);
+        }
         $this->authorize('update', $post);
 
         $validated = $request->validate([
@@ -102,7 +108,10 @@ class PostController extends BaseController
 
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->view('errors.404', ['errorType' => 'post'], 404);
+        }
         $this->authorize('delete', $post);
 
         $post->delete();
