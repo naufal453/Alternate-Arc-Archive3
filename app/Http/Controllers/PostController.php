@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Services\ImageUploadService;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Chapter;
 use App\Models\Genre;
 
@@ -67,8 +68,9 @@ class PostController extends BaseController
         $post = Post::with(['user'])->findOrFail($id);
         $chapters = Chapter::where('post_id', $id)->get();
 
-        if ($post->is_archived && auth()->id() !== $post->user_id) {
-            return view('errors.storyarchived');
+        // If post is archived and either guest or not the owner, show 404
+        if ($post->is_archived && (auth()->guest() || auth()->id() !== $post->user_id)) {
+            abort(404);
         }
 
         return view('home.post.detail', compact('post', 'chapters'));
@@ -86,11 +88,13 @@ class PostController extends BaseController
 
     public function update(Request $request, $id)
     {
+        //$iduser=Auth::users();
+        //dd($id);
         $post = Post::find($id);
         if (!$post) {
             return response()->view('errors.404', ['errorType' => 'post'], 404);
         }
-        $this->authorize('update', $post);
+        //$this->authorize('update', $post);
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
