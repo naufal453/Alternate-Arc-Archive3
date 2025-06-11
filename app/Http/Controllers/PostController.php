@@ -137,4 +137,27 @@ class PostController extends BaseController
             ['username' => $post->user->username]
         );
     }
+
+    public function like($id)
+    {
+        $post = Post::findOrFail($id);
+        $user = auth()->user();
+
+        // Prevent duplicate likes
+        if (!$post->likes->contains('user_id', $user->id)) {
+            $post->likes()->create(['user_id' => $user->id]);
+        }
+
+        return back();
+    }
+
+    public function unlike($id)
+    {
+        $post = Post::findOrFail($id);
+        $user = auth()->user();
+
+        $post->likes()->where('user_id', $user->id)->delete();
+
+        return back();
+    }
 }
