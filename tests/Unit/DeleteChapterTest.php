@@ -24,4 +24,28 @@ class DeleteChapterTest extends TestCase
         $response->assertRedirect();
         $this->assertDatabaseMissing('chapters', ['id' => $chapter->id]);
     }
+    public function test_non_owner_cannot_delete_chapter()
+    {
+        $user = User::factory()->create();
+        $post = Post::factory()->create();
+        $chapter = Chapter::factory()->for($user)->for($post)->create();
+        $this->actingAs(User::factory()->create());
+
+        $response = $this->delete(route('chapters.destroy', $chapter->id));
+        $response->assertForbidden();
+        $this->assertDatabaseHas('chapters', ['id' => '2']
+        /*['id' => $chapter->id]*/);
+    }
+    public function test_cannot_delete_chapter_with_invalid_id()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $invalidChapterId = 999;
+
+        $response = $this->delete(route('chapters.destroy', $invalidChapterId));
+        $response->assertFailed();
+
+        $this->assertDatabaseMissing('chapters', ['id' => $invalidChapterId]);
+    }
 }

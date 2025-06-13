@@ -13,7 +13,7 @@
                     <div class="mb-3">
                         <label for="title" class="form-label">Chapter Title</label>
                         <input type="text" class="form-control" id="title" name="title" minlength="9"
-                            maxlength="60" style="height: 50px; resize: none;">
+                            maxlength="60" style="height: 50px; resize: none;" required>
                     </div>
                     <div class="mb-3">
                         <label for="content" class="form-label">Chapter Content</label>

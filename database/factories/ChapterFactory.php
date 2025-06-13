@@ -22,6 +22,7 @@ class ChapterFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => '1'/*$this->faker->unique()->numberBetween(1, 1000)*/,
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
             'post_id' => Post::factory(),

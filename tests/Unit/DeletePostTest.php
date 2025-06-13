@@ -22,4 +22,5 @@ class DeletePostTest extends TestCase
         $response->assertRedirect();
         $this->assertDatabaseMissing('posts', ['id' => $post->id]);
     }
+
 }

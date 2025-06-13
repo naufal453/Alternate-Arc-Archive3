@@ -17,13 +17,18 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(),
+            'title' =>
+                'Haha'/*$this->faker->sentence()*/,
+            'description' =>
+                '123'/*$this->faker->paragraph()*/,
             'user_id' => \App\Models\User::factory(),
-            'reference' => $this->faker->url(),
-            'genre' => $this->faker->word(),
+            'reference' =>
+                $this->faker->url(),
+            'genre' =>
+                $this->faker->word(),
             'image_path' => null, // atau $this->faker->imageUrl() jika ingin dummy image
-            'is_archived' => false,
+            'is_archived' =>
+                false,
         ];
     }
 }
